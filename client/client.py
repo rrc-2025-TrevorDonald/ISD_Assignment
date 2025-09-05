@@ -19,10 +19,10 @@ class Client():
             The constructor for the client class.
 
         Args:
-            client_number(int):
-            first_name(str):
-            last_name(str):
-            email_address(str):
+            client_number(int): The number assigned to the given client.
+            first_name(str): The clients first name.
+            last_name(str): The clients last name.
+            email_address(str): The clients email address.
 
         Raises:
             ValueError("Client Number must be of a numeric type."): When the
@@ -54,6 +54,15 @@ class Client():
         else:
             self.__email_address = "email@pixell-river.com"
             raise EmailNotValidError("Email Address not valid")
+
+    def __str__(self):
+        """
+        Description:
+            __str__ function for the Client class, displays information in a
+            human readable way.
+        """
+        return (f"{self.__last_name}, {self.__first_name}, "
+                f"[{self.__client_number}] - {self.__email_address}")
 
     @property
     def client_number(self) -> int:
