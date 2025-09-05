@@ -46,9 +46,43 @@ class Client():
 
         if len(last_name.strip()) <= 0:
             raise ValueError("Last Name must not be blank.")
+        else:
+            self.__last_name = last_name
 
         if validate_email(email_address):
             self.__email_address = email_address
         else:
-            raise EmailNotValidError("Email Address not valid")
             self.__email_address = "email@pixell-river.com"
+            raise EmailNotValidError("Email Address not valid")
+
+    @property
+    def client_number(self) -> int:
+        """
+        Description:
+            Accessor for private attribute client_number.
+        """
+        return self.__client_number
+
+    @property
+    def first_name(self) -> str:
+        """
+        Description:
+            Accessor for private attribute first_name.
+        """
+        return self.__first_name
+
+    @property
+    def last_name(self) -> str:
+        """
+        Description:
+            Accessor for private attribute last_name.
+        """
+        return self.__last_name
+
+    @property
+    def email_address(self) -> str:
+        """
+        Description:
+            Accessor for private attribute email_address.
+        """
+        return self.__email_address
