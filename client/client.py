@@ -31,8 +31,8 @@ class Client():
             is blank as nothing was entered.
             ValueError("Last Name must not be blank."): When the Last Name
             is blank as nothing was entered.
-            EmailNotValidError("Email Address not valid"): When the entered
-            Email Address is not valid.
+            EmailNotValidError("An email address must have an @-sign."): When
+            the entered Email Address is not valid.
         """
         if isinstance(client_number, int):
             self.__client_number = client_number
@@ -53,7 +53,7 @@ class Client():
             self.__email_address = email_address
         else:
             self.__email_address = "email@pixell-river.com"
-            raise EmailNotValidError("Email Address not valid")
+            raise EmailNotValidError("An email address must have an @-sign")
 
     def __str__(self):
         """
