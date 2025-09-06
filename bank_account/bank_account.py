@@ -43,3 +43,27 @@ class BankAccount():
         except:
             self.__balance = 0
             raise ValueError("Balance is not of a float type.")
+
+    @property
+    def account_number(self) -> int:
+        """
+        Description:
+            Accessor for private attribute account_number.
+        """
+        return self.__account_number
+
+    @property
+    def client_number(self) -> int:
+        """
+        Description:
+            Accessor for private attribute client_number.
+        """
+        return self.__client_number
+
+    @property
+    def balance(self) -> float:
+        """
+        Description:
+            Accessor for private attribute balance.
+        """
+        return self.__balance
