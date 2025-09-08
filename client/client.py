@@ -76,7 +76,8 @@ class Client():
             Accessor for private attribute client_number.
 
         Returns:
-            self.__client_number(int): 
+            self.__client_number(int): The client_id of the initiated
+            instance.
         """
         return self.__client_number
 
@@ -87,7 +88,8 @@ class Client():
             Accessor for private attribute first_name.
 
         Returns:
-            self.__first_name(str):
+            self.__first_name(str): The first_name of the initiated
+            instance.
         """
         return self.__first_name
 
@@ -98,7 +100,8 @@ class Client():
             Accessor for private attribute last_name.
 
         Returns:
-            self.__last_name(str):
+            self.__last_name(str): The last_name of the initiated
+            instance.
         """
         return self.__last_name
 
@@ -109,6 +112,7 @@ class Client():
             Accessor for private attribute email_address.
 
         Returns:
-            self.__email_address(str):
+            self.__email_address(str): The email_address of the
+            initiated instance.
         """
         return self.__email_address

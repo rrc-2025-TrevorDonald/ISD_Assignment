@@ -89,5 +89,27 @@ class BankAccount():
         """
         try:
             amount = float(amount)
+
+            if amount < 0:
+                self.deposit(amount)
+            else:
+                self.withdraw(amount)
         except:
+            raise ValueError("Deposit amount: {amount} must be numeric.")
+
+    def deposit(self, deposit_amount:float) -> float:
+        """
+        Description:
+        Args:
+        Returns:
+        Raises:
+        """
+        if not isinstance(deposit_amount, float):
             raise ValueError("Amount must be of a numeric type.")
+
+        if deposit_amount <= 0:
+            raise ValueError("Deposit amount: {formatted amount}" \
+                            "must be positive.")
+
+        self.__balance += deposit_amount
+
