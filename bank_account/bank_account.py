@@ -45,6 +45,18 @@ class BankAccount():
             self.__balance = 0
             raise ValueError("Balance is not of a float type.")
 
+    def __str__(self) -> str:
+        """
+        Description:
+            __str__ function for the BankAccount class, displays
+            information in a human readable way.
+        Returns:
+             A human readable string representing the account_number,
+             and balance of th initiated instance.
+        """
+        return(f"Account Number: {self.__account_number} Balance: "
+               f"${self.__balance:,.2f}")
+
     @property
     def account_number(self) -> int:
         """
@@ -69,7 +81,7 @@ class BankAccount():
         """
         return self.__balance
 
-    def update_balance(self, amount:float) -> float:
+    def update_balance(self, amount:float) -> None:
         """
         Description:
             Function define for updating the balance of the given
@@ -77,11 +89,7 @@ class BankAccount():
 
         Args:
             amount(float): The amount that will be used to update the
-            account with, wether that be addition or subtracting.
-
-        Returns:
-            balance(float): The updated balance amount after the
-            addition or subtraction has been made
+            account.
 
         Raises:
             ValueError(Amount must be of a numeric type.): When the
@@ -89,27 +97,61 @@ class BankAccount():
         """
         try:
             amount = float(amount)
-
-            if amount < 0:
-                self.deposit(amount)
-            else:
-                self.withdraw(amount)
+            self.__balance += amount
         except:
-            raise ValueError("Deposit amount: {amount} must be numeric.")
-
-    def deposit(self, deposit_amount:float) -> float:
-        """
-        Description:
-        Args:
-        Returns:
-        Raises:
-        """
-        if not isinstance(deposit_amount, float):
             raise ValueError("Amount must be of a numeric type.")
 
-        if deposit_amount <= 0:
-            raise ValueError("Deposit amount: {formatted amount}" \
-                            "must be positive.")
+    def deposit(self, amount:float) -> None:
+        """
+        Description:
+            Defined function for depositing from of the initiated
+            instance.
 
-        self.__balance += deposit_amount
+        Args:
+            amount(float): The amount that will be deposited into the
+            given account.
 
+        Raises:
+            ValueError(Amount must be of a numeric type.): When the
+            entered value is not of a numeric type.
+            ValueError(Deposit amount: {amount} must be positive.): When
+            the entered amount is not a positive number.
+        """
+        if not isinstance(amount, float):
+            raise ValueError("Amount must be of a numeric type.")
+
+        if amount <= 0:
+            raise ValueError(f"Deposit amount: {amount} must be positive.")
+
+        self.__balance += amount
+
+    def withdraw(self, amount:float) -> None:
+        """
+        Description:
+            Defined function for withdrawing from of the initiated
+            instance.
+
+        Args:
+            amount(float): The amount that will be withdraw'd from the
+            given account.
+
+        Raises:
+            ValueError(Withdraw amount: {amount} must be numeric.): When
+            the entered value is not of a numeric type.
+            ValueError(Withdraw amount: {amount} must be positive.):
+            When the entered amount is not a positive number.
+            ValueError(Withdraw amount: {amount} must not exceed the
+            account balance: {self.__balance}.): When the amount entered
+            is more than the balance of the account.
+        """
+        if not isinstance(amount, float):
+            raise ValueError(f"Withdraw amount: {amount} must be numeric.")
+
+        if amount <= 0:
+            raise ValueError(f"Withdraw amount: {amount} must be positive.")
+
+        if amount > self.__balance:
+            raise ValueError(f"Withdraw amount: {amount} must not exceed the" \
+                            f"account balance: {self.__balance}.")
+        else:
+            self.__balance -= amount
