@@ -25,14 +25,14 @@ class Client():
             email_address(str): The clients email address.
 
         Raises:
-            ValueError("Client Number must be of a numeric type."): When the
-            Client Number is not a numeric type.
-            ValueError("First Name must not be blank."): When the First Name
-            is blank as nothing was entered.
-            ValueError("Last Name must not be blank."): When the Last Name
-            is blank as nothing was entered.
-            EmailNotValidError("An email address must have an @-sign."): When
-            the entered Email Address is not valid.
+            ValueError("Client Number must be of a numeric type."):
+            When the Client Number is not a numeric type.
+            ValueError("First Name must not be blank."): When the First
+            Name is blank as nothing was entered.
+            ValueError("Last Name must not be blank."): When the Last
+            Name is blank as nothing was entered
+            EmailNotValidError("An email address must have an @-sign."):
+            When the entered Email Address is not valid.
         """
         if isinstance(client_number, int):
             self.__client_number = client_number
@@ -52,14 +52,19 @@ class Client():
         if validate_email(email_address):
             self.__email_address = email_address
         else:
-            self.__email_address = "email@pixell-river.com"
-            raise EmailNotValidError("An email address must have an @-sign")
+            self.email_address = "email@pixell-river.com"
+            raise EmailNotValidError
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Description:
-            __str__ function for the Client class, displays information in a
-            human readable way.
+            __str__ function for the Client class, displays information
+            in a human readable way.
+
+        Returns:
+            A human readable string representing the client_number,
+            first_name, last_name and email_address of the initiated
+            instance.
         """
         return (f"{self.__last_name}, {self.__first_name}, "
                 f"[{self.__client_number}] - {self.__email_address}")
@@ -69,6 +74,9 @@ class Client():
         """
         Description:
             Accessor for private attribute client_number.
+
+        Returns:
+            self.__client_number(int): 
         """
         return self.__client_number
 
@@ -77,6 +85,9 @@ class Client():
         """
         Description:
             Accessor for private attribute first_name.
+
+        Returns:
+            self.__first_name(str):
         """
         return self.__first_name
 
@@ -85,6 +96,9 @@ class Client():
         """
         Description:
             Accessor for private attribute last_name.
+
+        Returns:
+            self.__last_name(str):
         """
         return self.__last_name
 
@@ -93,5 +107,8 @@ class Client():
         """
         Description:
             Accessor for private attribute email_address.
+
+        Returns:
+            self.__email_address(str):
         """
         return self.__email_address

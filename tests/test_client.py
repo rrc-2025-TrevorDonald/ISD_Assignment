@@ -41,8 +41,8 @@ class TestClient(unittest.TestCase):
     def test_client_number_invalid_type(self):
         """
         Description:
-            Test function used for verifying proper ValueError is called when
-            a non integer is entered as a client_number.
+            Test function used for verifying proper ValueError is called
+            when a non integer is entered as a client_number.
         """
         # Arrange
         expected = "Client Number must be of a numeric type."
@@ -54,8 +54,8 @@ class TestClient(unittest.TestCase):
     def test_first_name_invalid_empty(self):
         """
         Description:
-            Test function used for verifying proper ValueError is called when
-            a no first_name is entered.
+            Test function used for verifying proper ValueError is called
+            when a no first_name is entered.
         """
         # Arrange
         expected = "First Name must not be blank."
@@ -68,8 +68,8 @@ class TestClient(unittest.TestCase):
     def test_last_name_invalid_empty(self):
         """
         Description:
-            Test function used for verifying proper ValueError is called when
-            a no last_name is entered.
+            Test function used for verifying proper ValueError is called
+            when a no last_name is entered.
         """
         # Arrange
         expected = "Last Name must not be blank."
@@ -82,15 +82,17 @@ class TestClient(unittest.TestCase):
     def test_email_address_invalid_entry(self):
         """
         Description:
-            Test function used for verifying proper EmailNotValidError is
-            called when an email that is not valid is entered.
+            Test function used for verifying proper EmailNotValidError
+            is called when an email that is not valid is entered.
         """
         # Arrange
         expected = "An email address must have an @-sign."
 
         with self.assertRaises(EmailNotValidError) as context:
-            Client(123, "Trevor", "Donald", "invalid")
-        self.assertEqual(expected, str(context.exception))
+            bad_client = Client(123, "Trevor", "Donald", "invalid")
+            self.assertEqual(expected, str(context.exception))
+            self.assertEqual("email@pixell-river.com",
+                            bad_client.email_address)
 
     def test_client_number_accessor_valid(self):
         """
@@ -132,8 +134,9 @@ class TestClient(unittest.TestCase):
     def test_str_valid(self):
         """
         Description:
-            Test function defined that the __str__ function is outputting the
-            proper information into a string when called by print().
+            Test function defined that the __str__ function is
+            outputting the proper information into a string when called
+            by print().
         """
         self.assertEqual("Donald, Trevor, [123] - Tdonald35@academic.rrc.ca",
                          str(self.client))

@@ -15,17 +15,18 @@ class BankAccount():
             The constructor for the BankAccount class.
 
         Args:
-            account_number(int): The account number assigned in corelation to
-            client.
+            account_number(int): The account number assigned in
+            corelation to client.
             client_number(int): The number assigned to the given client.
             balance(float): The balance of the account.
 
         Raises:
-            ValueError(Account Number must be of a numeric type.): When the
-            account_number entered is not a integer type.
-            ValueError(Client Number must be of a numeric type.): When the
-            client_number entered is not a integer type.
-            ValueError("Balance is not of a float type."): When the balance
+            ValueError(Account Number must be of a numeric type.): When
+            the account_number entered is not a integer type.
+            ValueError(Client Number must be of a numeric type.): When
+            the  client_number entered is not a integer type.
+            ValueError("Balance is not of a float type."): When the
+            balance
             cannot be converted to a float if it is not already.
         """
         if isinstance(account_number, int):
@@ -67,3 +68,26 @@ class BankAccount():
             Accessor for private attribute balance.
         """
         return self.__balance
+
+    def update_balance(self, amount:float) -> float:
+        """
+        Description:
+            Function define for updating the balance of the given
+            account.
+
+        Args:
+            amount(float): The amount that will be used to update the
+            account with, wether that be addition or subtracting.
+
+        Returns:
+            balance(float): The updated balance amount after the
+            addition or subtraction has been made
+
+        Raises:
+            ValueError(Amount must be of a numeric type.): When the
+            amount entered is not of a numeric type.
+        """
+        try:
+            amount = float(amount)
+        except:
+            raise ValueError("Amount must be of a numeric type.")
