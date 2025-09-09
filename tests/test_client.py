@@ -131,7 +131,7 @@ class TestClient(unittest.TestCase):
         self.assertEqual("Tdonald35@academic.rrc.ca",
                          self.client.email_address)
 
-    def test_str_valid(self):
+    def test_client_str_valid(self):
         """
         Description:
             Test function defined that the __str__ function is
