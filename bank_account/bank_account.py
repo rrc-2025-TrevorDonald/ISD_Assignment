@@ -42,7 +42,8 @@ class BankAccount():
         if isinstance(balance, float):
             self.__balance = balance
         elif isinstance(balance, int):
-            self.__balance = float(balance)
+            balance = float(balance)
+            self.__balance = balance
         else:
             self.__balance = 0
             raise ValueError("Balance is not of a float type.")
