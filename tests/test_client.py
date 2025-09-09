@@ -20,16 +20,16 @@ class TestClient(unittest.TestCase):
     def setUp(self):
         """
         Description:
-            Setup for unittest's, it allows for more efficient code as well
-            as less clutter.
+            Setup for unittest's, it allows for more efficient code as
+            well as less clutter.
         """
         self.client = Client(123, "Trevor", "Donald",
                              "Tdonald35@academic.rrc.ca")
     def test_init_valid(self):
         """
         Description:
-            Test function for verifying that the constructor for Client class
-            is functioning properly.
+            Test function for verifying that the constructor for Client
+            class is functioning properly.
         """
         # Act & Assert
         self.assertEqual(123, self.client._Client__client_number)
