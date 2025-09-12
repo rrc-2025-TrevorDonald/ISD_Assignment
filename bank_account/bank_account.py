@@ -65,6 +65,10 @@ class BankAccount():
         """
         Description:
             Accessor for private attribute account_number.
+
+        Returns:
+            self.__account_number(int): The account_number of the
+            initiated instance.
         """
         return self.__account_number
 
@@ -73,6 +77,10 @@ class BankAccount():
         """
         Description:
             Accessor for private attribute client_number.
+
+        Returns:
+            self.__client_number(int): The client_number of the
+            initiated instance.
         """
         return self.__client_number
 
@@ -81,6 +89,10 @@ class BankAccount():
         """
         Description:
             Accessor for private attribute balance.
+        
+        Returns:
+            self.__balance(float): The balance of the initiated
+            instance.
         """
         return self.__balance
 
@@ -156,7 +168,8 @@ class BankAccount():
         """
         if isinstance(amount, float):
             if amount <= 0:
-                raise ValueError(f"Withdraw amount: {amount} must be positive.")
+                raise ValueError(f"Withdraw amount: {amount}" /
+                                 " must be positive.")
 
             if amount > self.__balance:
                 raise ValueError(f"Withdraw amount: {amount} must not exceed" /
@@ -164,7 +177,8 @@ class BankAccount():
             self.__balance -= amount
         elif isinstance(amount, int):
             if amount <= 0:
-                raise ValueError(f"Withdraw amount: {amount} must be positive.")
+                raise ValueError(f"Withdraw amount: {amount}" \
+                                 f" must be positive.")
 
             if amount > self.__balance:
                 raise ValueError(f"Withdraw amount: {amount} must not exceed" \
