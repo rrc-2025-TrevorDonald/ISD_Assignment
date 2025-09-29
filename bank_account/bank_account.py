@@ -4,7 +4,7 @@ This file holds the BankAccount class and functions.
 __author__ = "Trevor Donald"
 __version__ = "1.0.0"
 
-import datetime
+from datetime import date, datetime
 from abc import ABC,abstractmethod
 
 class BankAccount(ABC):
@@ -15,7 +15,7 @@ class BankAccount(ABC):
         SavingsAccount.
     """
     def __init__(self, account_number:int, client_number:int, balance:float,
-                 BASE_SERVICE_CHARGE:float = 0.50):
+                 date_created:date, BASE_SERVICE_CHARGE:float = 0.50):
         """
         Description:
             The constructor for the BankAccount class.
@@ -25,6 +25,7 @@ class BankAccount(ABC):
             corelation to client.
             client_number(int): The number assigned to the given client.
             balance(float): The balance of the account.
+            date_created(date): The date that the account was created.c
             BASE_SERVICE_CHARGE(float): The base service charge rate for
             all child classes
 
@@ -55,6 +56,14 @@ class BankAccount(ABC):
         else:
             self.__balance = 0
             raise ValueError("Balance is not of a float type.")
+
+        if isinstance(date_created, date):
+            self._date_created = date_created
+        else:
+            raise ValueError("Date is not a valid representation of a" \
+            " date.")
+
+        self.BASE_SERVICE_CHARGES = BASE_SERVICE_CHARGE
 
     def __str__(self) -> str:
         """
@@ -196,6 +205,7 @@ class BankAccount(ABC):
         else:
             raise ValueError(f"Withdraw amount: {amount} must be numeric.")
 
+    @abstractmethod
     def get_service_charges(self) -> float:
         """
         Description:
