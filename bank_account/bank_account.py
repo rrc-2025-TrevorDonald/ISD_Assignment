@@ -15,7 +15,7 @@ class BankAccount(ABC):
         SavingsAccount.
     """
     def __init__(self, account_number:int, client_number:int, balance:float,
-                 date_created:date, BASE_SERVICE_CHARGE:float = 0.50):
+                 date_created:date):
         """
         Description:
             The constructor for the BankAccount class.
@@ -56,14 +56,13 @@ class BankAccount(ABC):
         else:
             self.__balance = 0
             raise ValueError("Balance is not of a float type.")
-
+        
         if isinstance(date_created, date):
             self._date_created = date_created
         else:
-            raise ValueError("Date is not a valid representation of a" \
-            " date.")
+            self._date_created = date.today()
 
-        self.BASE_SERVICE_CHARGES = BASE_SERVICE_CHARGE
+        self.BASE_SERVICE_CHARGES = 0.50
 
     def __str__(self) -> str:
         """
