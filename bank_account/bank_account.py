@@ -27,7 +27,7 @@ class BankAccount(ABC):
             balance(float): The balance of the account.
             date_created(date): The date that the account was created.c
             BASE_SERVICE_CHARGE(float): The base service charge rate for
-            all child classes
+            all child classes.
 
         Raises:
             ValueError(Account Number must be of a numeric type.): When
@@ -35,8 +35,7 @@ class BankAccount(ABC):
             ValueError(Client Number must be of a numeric type.): When
             the  client_number entered is not a integer type.
             ValueError("Balance is not of a float type."): When the
-            balance
-            cannot be converted to a float if it is not already.
+            balance cannot be converted to a float if it is not already.
         """
         if isinstance(account_number, int):
             self.__account_number = account_number
@@ -56,7 +55,7 @@ class BankAccount(ABC):
         else:
             self.__balance = 0
             raise ValueError("Balance is not of a float type.")
-        
+
         if isinstance(date_created, date):
             self._date_created = date_created
         else:
