@@ -19,4 +19,4 @@ Encapsulation was achieved by using hidden/private variables, using the double u
 private and not accessible without the use of a setter or getter so when defining the client_number
 we would set it to be "__client_number".
 
-## Assignment 2
+## Assignment 2: Inheritance with parent/child classes

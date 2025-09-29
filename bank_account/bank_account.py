@@ -4,12 +4,18 @@ This file holds the BankAccount class and functions.
 __author__ = "Trevor Donald"
 __version__ = "1.0.0"
 
-class BankAccount():
+import datetime
+from abc import ABC,abstractmethod
+
+class BankAccount(ABC):
     """
     Description:
-        Class that will define all BankAccount functions.
+        Class that will define all BankAccount functions, it's also the
+        "Parent/Superclass" for ChequingAccount, InvestmentAccount and
+        SavingsAccount.
     """
-    def __init__(self, account_number:int, client_number:int, balance:float):
+    def __init__(self, account_number:int, client_number:int, balance:float,
+                 BASE_SERVICE_CHARGE:float = 0.50):
         """
         Description:
             The constructor for the BankAccount class.
@@ -19,6 +25,8 @@ class BankAccount():
             corelation to client.
             client_number(int): The number assigned to the given client.
             balance(float): The balance of the account.
+            BASE_SERVICE_CHARGE(float): The base service charge rate for
+            all child classes
 
         Raises:
             ValueError(Account Number must be of a numeric type.): When
@@ -187,3 +195,15 @@ class BankAccount():
             self.__balance -= amount
         else:
             raise ValueError(f"Withdraw amount: {amount} must be numeric.")
+
+    def get_service_charges(self) -> float:
+        """
+        Description:
+            Abstract method get_service_charges used by child/sub
+            classes to perform calculations depending on type of
+            account.
+
+        Returns:
+            Float: The service charge of the type of account.
+        """
+        pass
