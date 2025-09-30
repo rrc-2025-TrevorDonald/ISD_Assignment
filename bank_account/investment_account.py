@@ -42,3 +42,16 @@ class InvestmentAccount(BankAccount):
             self.__management_fee = float(management_fee)
         else:
             self.__management_fee = 2.55
+
+    def __str__(self):
+        """
+        Description:
+            Human readable output of the InvestmentAccount class.
+
+        Returns:
+            String: A readout of the values of the InvestmentAccount
+            class.
+        """
+        return (super().__str__() + f"\nDate Created: {self._date_created} "
+                + f"Management Fee: ${self.__management_fee} Account Type: "
+                + "Investment")
