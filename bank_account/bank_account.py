@@ -26,9 +26,7 @@ class BankAccount(ABC):
             corelation to client.
             client_number(int): The number assigned to the given client.
             balance(float): The balance of the account.
-            date_created(date): The date that the account was created.c
-            BASE_SERVICE_CHARGE(float): The base service charge rate for
-            all child classes.
+            date_created(date): The date that the account was created.
 
         Raises:
             ValueError(Account Number must be of a numeric type.): When

@@ -20,3 +20,18 @@ private and not accessible without the use of a setter or getter so when definin
 we would set it to be "__client_number".
 
 ## Assignment 2: Inheritance with parent/child classes
+
+Polymorphism was achieved by the Child/Sub classes ChequingAccount, InvestmentAccount and SavingsAccount
+inheriting the abstract method get_service_charges from the Parent/Super class BankAccount. The method
+is used in different ways depending of the instance of the class initialized but is still a method of
+any type of bank account. When using get_service_charge within a ChequingAccount it checks to see if the
+balance is above the overdraft_limit it the service_charge will be the BASE_SERVICE_CHARGE (0.50) set by
+the Parent/Super class of BankAccount, if the balance is lower than the the overdraft_limit it will
+subtract the balance with the overdraft_limit then multiply that amount by the overdraft rate and then
+add the BASE_SERVICE_CHARGE. When using get_service_charge within a InvestmentAccount if the account was
+created 10 or more years earlier the service_charge will be the BASE_SERVICE_CHARGE, if the account is
+newer than 10 years the service_charge will be the BASE_SERVICE_CHARGE plu the manager_fee. Finally when
+using get_service_charge with a SavingsAccount if the balance is above the minimum_balance the
+service_charge will be the BASE_SERVICE_CHARGE but if the balance is less than the minimum_balance the
+service_charge will be the BASE_SERVICE_CHARGE multiplied by the SERVICE_CHARGE_PREMIUM (2.0) defined
+by SavingsAccount class.

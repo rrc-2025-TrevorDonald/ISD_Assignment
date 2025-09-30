@@ -59,7 +59,7 @@ class ChequingAccount(BankAccount):
             class.
         """
         return (super().__str__() + "\nOverdraft Limit: "
-                + f"${self.__overdraft_limit} Overdraft Rate: "
+                + f"${self.__overdraft_limit:,.2f} Overdraft Rate: "
                 + f"{self.__overdraft_rate:.2%} Account Type: Chequing")
 
     def get_service_charges(self) -> float:

@@ -121,7 +121,7 @@ class TestClient(unittest.TestCase):
         """
         # Arrange
         expected = ("Account Number: 123 Balance: $1,050.50\nOverdraft Limit: "
-                    + "$-50 Overdraft Rate: 2.00% Account Type: Chequing")
+                    + "$-50.00 Overdraft Rate: 2.00% Account Type: Chequing")
 
         # Act & Assert
         self.assertEqual(expected, str(self.c_account))
