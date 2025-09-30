@@ -42,8 +42,32 @@ class SavingsAccount(BankAccount):
         else:
             self.__minimum_balance = 50.00
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
+        Description:
+            Human readable output of the SavingsAccount class.
+
+        Returns:
+            String: A readout of the values of the SavingsAccount
+            class.
         """
         return (super().__str__() + "\nMinimum Balance: "
                 + f"{self.__minimum_balance} Account Type: Savings")
+
+    def get_service_charges(self) -> float:
+        """
+        Description:
+            Function for calculate the service charges of the initiated
+            Savings Account.
+
+        Returns:
+            service_charges(float): The service charge of the initiated
+            Savings Account.
+        """
+        if self.balance >= self.__minimum_balance:
+            service_charge = BankAccount.BASE_SERVICE_CHARGES
+        else:
+            service_charge = (BankAccount.BASE_SERVICE_CHARGES *
+                            SavingsAccount.SERVICE_CHARGE_PREMIUM)
+
+        return service_charge
