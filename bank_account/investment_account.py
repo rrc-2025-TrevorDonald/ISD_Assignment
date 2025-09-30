@@ -16,7 +16,7 @@ class InvestmentAccount(BankAccount):
                 date_created:datetime, management_fee:float):
         """
          Description:
-            The constructor for the BankAccount class.
+            The constructor for the InvestmentAccount class.
 
         Args:
             account_number(int): The account number assigned in

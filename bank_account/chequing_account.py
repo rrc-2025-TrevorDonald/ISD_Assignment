@@ -16,7 +16,7 @@ class ChequingAccount(BankAccount):
                 overdraft_rate:float):
         """
          Description:
-            The constructor for the BankAccount class.
+            The constructor for the ChequingAccount class.
 
         Args:
             account_number(int): The account number assigned in
