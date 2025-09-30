@@ -2,7 +2,7 @@
 __author__ = "Trevor Donald"
 __version__ = "1.0.0"
 
-from datetime import datetime, date
+import datetime
 from bank_account import BankAccount
 
 class ChequingAccount(BankAccount):
@@ -12,7 +12,7 @@ class ChequingAccount(BankAccount):
         a Chequing Account.
     """
     def __init__(self, account_number:int, client_number:int, balance:float,
-                date_created:date, overdraft_limit:float,
+                date_created:datetime, overdraft_limit:float,
                 overdraft_rate:float):
         """
          Description:
@@ -24,8 +24,6 @@ class ChequingAccount(BankAccount):
             client_number(int): The number assigned to the given client.
             balance(float): The balance of the account.
             date_created(date): The date that the account was created.c
-            BASE_SERVICE_CHARGE(float): The base service charge rate for
-            all child classes.
             overdraft_limit(float): The maximum amount a balance can be
             overdrawn(below 0.00) before overdraft fees are applied.
             overdraft_rate(float): The rate to which overdraft fees will
@@ -51,7 +49,34 @@ class ChequingAccount(BankAccount):
         else:
             self.__overdraft_rate = 0.05
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """
+        Description:
+            Human readable output of the ChequingAccount class.
+
+        Returns:
+            String: A readout of the values of the ChequingAccount
+            class.
+        """
         return (super().__str__() + "\nOverdraft Limit: "
                 + f"${self.__overdraft_limit} Overdraft Rate: "
-                + f"{self.__overdraft_rate}% Account Type: Chequing")
+                + f"{self.__overdraft_rate:.0%} Account Type: Chequing")
+
+    def get_service_charges(self) -> float:
+        """
+        Description:
+            Function for calculate the service charges of the initiated
+            Chequing Account.
+
+        Returns:
+            service_charges(float): The service charge of the initiated
+            Chequing Account.
+        """
+        if self.balance < self.__overdraft_limit:
+            service_charges = (BankAccount.BASE_SERVICE_CHARGES + 
+                            (self.__overdraft_limit - self.balance) * 
+                            self.__overdraft_rate)
+        else:
+            service_charges = BankAccount.BASE_SERVICE_CHARGES
+
+        return service_charges
