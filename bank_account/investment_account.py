@@ -43,7 +43,7 @@ class InvestmentAccount(BankAccount):
         else:
             self.__management_fee = 2.55
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Description:
             Human readable output of the InvestmentAccount class.
@@ -60,3 +60,21 @@ class InvestmentAccount(BankAccount):
 
         return (super().__str__() + f"\nDate Created: {self._date_created} "
                 + f"Management Fee: {m_fee} Account Type: Investment")
+
+    def get_service_charges(self) -> float:
+        """
+        Description:
+            Function for calculate the service charges of the initiated
+            Investment Account.
+
+        Returns:
+            service_charges(float): The service charge of the initiated
+            Investment Account.
+        """
+        if self._date_created > InvestmentAccount.TEN_YEARS_AGO:
+            service_charges = BankAccount.BASE_SERVICE_CHARGES + 0
+        else:
+            service_charges = (BankAccount.BASE_SERVICE_CHARGES +
+                                self.__management_fee)
+
+        return service_charges
