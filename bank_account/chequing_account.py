@@ -50,3 +50,8 @@ class ChequingAccount(BankAccount):
             self.__overdraft_rate = float(overdraft_rate)
         else:
             self.__overdraft_rate = 0.05
+
+    def __str__(self):
+        return (super().__str__() + "\nOverdraft Limit: "
+                + f"${self.__overdraft_limit} Overdraft Rate: "
+                + f"{self.__overdraft_rate}% Account Type: Chequing")
