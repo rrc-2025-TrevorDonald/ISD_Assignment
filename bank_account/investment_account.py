@@ -52,11 +52,11 @@ class InvestmentAccount(BankAccount):
             String: A readout of the values of the InvestmentAccount
             class.
         """
-        if self._date_created > InvestmentAccount.TEN_YEARS_AGO:
+        if self._date_created < InvestmentAccount.TEN_YEARS_AGO:
             self.__management_fee = 0
-            m_fee = "waived"
+            m_fee = "Waived"
         else:
-            m_fee = f"${self.__management_fee}"
+            m_fee = f"${self.__management_fee:,.2f}"
 
         return (super().__str__() + f"\nDate Created: {self._date_created} "
                 + f"Management Fee: {m_fee} Account Type: Investment")
@@ -71,7 +71,7 @@ class InvestmentAccount(BankAccount):
             service_charges(float): The service charge of the initiated
             Investment Account.
         """
-        if self._date_created > InvestmentAccount.TEN_YEARS_AGO:
+        if self._date_created < InvestmentAccount.TEN_YEARS_AGO:
             service_charges = BankAccount.BASE_SERVICE_CHARGES + 0
         else:
             service_charges = (BankAccount.BASE_SERVICE_CHARGES +
