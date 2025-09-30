@@ -1,4 +1,4 @@
-""" """
+""" Chequing Account """
 __author__ = "Trevor Donald"
 __version__ = "1.0.0"
 
@@ -23,7 +23,7 @@ class ChequingAccount(BankAccount):
             corelation to client.
             client_number(int): The number assigned to the given client.
             balance(float): The balance of the account.
-            date_created(date): The date that the account was created.c
+            date_created(date): The date that the account was created.
             overdraft_limit(float): The maximum amount a balance can be
             overdrawn(below 0.00) before overdraft fees are applied.
             overdraft_rate(float): The rate to which overdraft fees will
@@ -60,7 +60,7 @@ class ChequingAccount(BankAccount):
         """
         return (super().__str__() + "\nOverdraft Limit: "
                 + f"${self.__overdraft_limit} Overdraft Rate: "
-                + f"{self.__overdraft_rate:.0%} Account Type: Chequing")
+                + f"{self.__overdraft_rate:.2%} Account Type: Chequing")
 
     def get_service_charges(self) -> float:
         """

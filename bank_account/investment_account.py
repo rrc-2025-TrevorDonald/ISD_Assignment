@@ -52,6 +52,11 @@ class InvestmentAccount(BankAccount):
             String: A readout of the values of the InvestmentAccount
             class.
         """
+        if self._date_created > InvestmentAccount.TEN_YEARS_AGO:
+            self.__management_fee = 0
+            m_fee = "waived"
+        else:
+            m_fee = f"${self.__management_fee}"
+
         return (super().__str__() + f"\nDate Created: {self._date_created} "
-                + f"Management Fee: ${self.__management_fee} Account Type: "
-                + "Investment")
+                + f"Management Fee: {m_fee} Account Type: Investment")
