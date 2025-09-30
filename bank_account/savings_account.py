@@ -41,3 +41,9 @@ class SavingsAccount(BankAccount):
             self.__minimum_balance = minimum_balance
         else:
             self.__minimum_balance = 50.00
+
+    def __str__(self):
+        """
+        """
+        return (super().__str__() + "\nMinimum Balance: "
+                + f"{self.__minimum_balance} Account Type: Savings")
