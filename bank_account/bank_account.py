@@ -4,7 +4,7 @@ This file holds the BankAccount class and functions.
 __author__ = "Trevor Donald"
 __version__ = "1.0.0"
 
-from datetime import date, datetime
+from datetime import date
 from abc import ABC,abstractmethod
 
 class BankAccount(ABC):

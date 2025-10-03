@@ -3,6 +3,7 @@ __author__ = "Trevor Donald"
 __version__ = "1.0.0"
 
 import datetime
+from datetime import date
 from bank_account import BankAccount
 
 class InvestmentAccount(BankAccount):
@@ -13,7 +14,7 @@ class InvestmentAccount(BankAccount):
     """
     TEN_YEARS_AGO = datetime.date.today() - datetime.timedelta(days=10*365.25)
     def __init__(self, account_number:int, client_number:int, balance:float,
-                date_created:datetime, management_fee:float):
+                date_created:date, management_fee:float):
         """
          Description:
             The constructor for the InvestmentAccount class.

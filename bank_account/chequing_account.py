@@ -2,7 +2,7 @@
 __author__ = "Trevor Donald"
 __version__ = "1.0.0"
 
-import datetime
+from datetime import date
 from bank_account import BankAccount
 
 class ChequingAccount(BankAccount):
@@ -12,7 +12,7 @@ class ChequingAccount(BankAccount):
         a Chequing Account.
     """
     def __init__(self, account_number:int, client_number:int, balance:float,
-                date_created:datetime, overdraft_limit:float,
+                date_created:date, overdraft_limit:float,
                 overdraft_rate:float):
         """
          Description:

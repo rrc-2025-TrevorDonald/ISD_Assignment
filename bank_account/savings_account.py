@@ -2,7 +2,7 @@
 __author__ = "Trevor Donald"
 __version__ = "1.0.0"
 
-import datetime
+from datetime import date
 from bank_account.bank_account import BankAccount
 
 class SavingsAccount(BankAccount):
@@ -13,7 +13,7 @@ class SavingsAccount(BankAccount):
     """
     SERVICE_CHARGE_PREMIUM = 2.00
     def __init__(self, account_number:int, client_number:int, balance:float,
-                date_created:datetime, minimum_balance:float):
+                date_created:date, minimum_balance:float):
         """
          Description:
             The constructor for the SavingsAccount class.
