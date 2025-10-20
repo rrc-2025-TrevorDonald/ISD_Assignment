@@ -26,3 +26,21 @@ class MinimumBalanceStrategy(ServiceChargeStrategy):
             before further service charges are applied.
         """
         self.__minimum_balance = minimum_balance
+
+    def calculate_service_charges(self, account:BankAccount) -> float:
+        """
+        Description:
+            The method used for calculating the fee applied to an
+            account below the minimum balance.
+
+        Args:
+            account (float): The bank account used to apply the
+            minimum balance fee charge to.
+        """
+        if account.__balance >= self.__minimum_balance:
+            service_charge = ServiceChargeStrategy.BASE_SERVICE_CHARGE
+        else:
+            service_charge = (ServiceChargeStrategy.BASE_SERVICE_CHARGE *
+                            MinimumBalanceStrategy.SERVICE_CHARGE_PREMIUM)
+
+        return service_charge
