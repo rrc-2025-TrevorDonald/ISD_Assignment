@@ -37,3 +37,14 @@ service_charge will be the BASE_SERVICE_CHARGE multiplied by the SERVICE_CHARGE_
 by SavingsAccount class.
 
 ## Assignment 3: Design Patterns
+
+## Strategy Pattern
+
+The strategy pattern is being used within this project by taking the place of the previously created
+method get_service_charge and making it more scalable and interchangeable. The ServiceChargeStrategy
+class contains 3 child classes, the OverdraftStrategy handles the charges being applied to an account
+thats balance is overdrawn past the assigned amount and applies the given overdraft rate to initiated
+account. The ManagementFeeStrategy handles the fee applied to investment account and will check to
+see if the account is more than 10 years old and handles the charge accordingly. Finally there is the
+MinimumBalanceStrategy the handles the fee applied to a savings account if they have less than the
+minimum balance and will apply the service charges accordingly.
