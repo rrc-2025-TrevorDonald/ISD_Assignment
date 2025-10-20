@@ -14,7 +14,6 @@ class BankAccount(ABC):
         "Parent/Superclass" for ChequingAccount, InvestmentAccount and
         SavingsAccount.
     """
-    BASE_SERVICE_CHARGES = 0.50
     def __init__(self, account_number:int, client_number:int, balance:float,
                  date_created:date):
         """

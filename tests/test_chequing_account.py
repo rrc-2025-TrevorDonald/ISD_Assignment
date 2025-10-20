@@ -5,6 +5,7 @@ __version__ = "1.0.0"
 import unittest
 import datetime
 from bank_account import *
+from patterns.strategy import *
 
 class TestClient(unittest.TestCase):
     """

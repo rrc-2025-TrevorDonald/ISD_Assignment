@@ -37,7 +37,7 @@ class MinimumBalanceStrategy(ServiceChargeStrategy):
             account (float): The bank account used to apply the
             minimum balance fee charge to.
         """
-        if account.__balance >= self.__minimum_balance:
+        if account.balance >= self.__minimum_balance:
             service_charge = ServiceChargeStrategy.BASE_SERVICE_CHARGE
         else:
             service_charge = (ServiceChargeStrategy.BASE_SERVICE_CHARGE *

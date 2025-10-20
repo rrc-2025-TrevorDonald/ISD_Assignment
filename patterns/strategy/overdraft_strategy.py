@@ -12,7 +12,7 @@ class OverdraftStrategy(ServiceChargeStrategy):
     """
     Description:
         The "Sub/child" class to ServiceChargeStrategy, responsible for
-        containing the methods applying an overdraft to and account.
+        containing the methods to apply a overdraft charge to an account.
     """
     def __init__(self, overdraft_limit:float, overdraft_rate:float):
         """
@@ -37,10 +37,9 @@ class OverdraftStrategy(ServiceChargeStrategy):
             account (BankAccount): The bank account used to apply the
             overdraft charge to.
         """
-
-        if account.__balance < self.__overdraft_limit:
+        if account.balance < self.__overdraft_limit:
             service_charges = (ServiceChargeStrategy.BASE_SERVICE_CHARGE +
-                               (self.__overdraft_limit - account.__balance) *
+                               (self.__overdraft_limit - account.balance) *
                                self.__overdraft_rate)
         else:
             service_charges = ServiceChargeStrategy.BASE_SERVICE_CHARGE
