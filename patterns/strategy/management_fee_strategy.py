@@ -29,3 +29,20 @@ class ManagementFeeStrategy(ServiceChargeStrategy):
         """
         self.__date_created = date_created
         self.__management_fee = management_fee
+
+    def calculate_service_charges(self, account:BankAccount) -> float:
+        """
+        Description:
+            The method used for calculating the Management fee.
+
+        Args:
+            account (BankAccount): The bank account used to apply the
+            management fee charge to.
+        """
+        if self.__date_created < ManagementFeeStrategy.TEN_YEARS_AGO:
+            service_charges = ServiceChargeStrategy.BASE_SERVICE_CHARGE + 0
+        else:
+            service_charges = (ServiceChargeStrategy.BASE_SERVICE_CHARGE +
+                                self.__management_fee)
+
+        return service_charges
