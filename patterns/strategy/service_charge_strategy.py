@@ -16,7 +16,7 @@ class ServiceChargeStrategy(ABC):
     BASE_SERVICE_CHARGE = 0.50
 
     @abstractmethod
-    def calculate_service_charges(self, account:BankAccount):
+    def calculate_service_charges(self, account:BankAccount) -> float:
         """
         Description:
             Abstract method thats going to be implemented within the

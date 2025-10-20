@@ -6,6 +6,7 @@ __author__ = "Trevor Donald"
 __version__ = "1.0.0"
 
 from patterns.strategy.service_charge_strategy import ServiceChargeStrategy
+from bank_account.bank_account import BankAccount
 
 class OverdraftStrategy(ServiceChargeStrategy):
     """
@@ -24,5 +25,24 @@ class OverdraftStrategy(ServiceChargeStrategy):
             overdraft_rate (float): The rate to which overdraft fees
             will be applied.
         """
-        self.___overdraft_limit = overdraft_limit
-        self.___overdraft_rate = overdraft_rate
+        self.__overdraft_limit = overdraft_limit
+        self.__overdraft_rate = overdraft_rate
+
+    def calculate_service_charges(self, account:BankAccount) -> float:
+        """
+        Description:
+            The method used for calculating the Overdraft Charge.
+        
+        Args:
+            account (BankAccount): The bank account used to apply the
+            overdraft charge to.
+        """
+
+        if account.__balance < self.__overdraft_limit:
+            service_charges = (ServiceChargeStrategy.BASE_SERVICE_CHARGE +
+                               (self.__overdraft_limit - account.__balance) *
+                               self.__overdraft_rate)
+        else:
+            service_charges = ServiceChargeStrategy.BASE_SERVICE_CHARGE
+
+        return service_charges
