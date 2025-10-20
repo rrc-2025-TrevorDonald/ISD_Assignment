@@ -35,3 +35,5 @@ using get_service_charge with a SavingsAccount if the balance is above the minim
 service_charge will be the BASE_SERVICE_CHARGE but if the balance is less than the minimum_balance the
 service_charge will be the BASE_SERVICE_CHARGE multiplied by the SERVICE_CHARGE_PREMIUM (2.0) defined
 by SavingsAccount class.
+
+## Assignment 3: Design Patterns
