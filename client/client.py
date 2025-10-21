@@ -4,10 +4,13 @@ This file holds the Client class and functions.
 __author__ = "Trevor Donald"
 __version__ = "1.0.0"
 
+import datetime
 from email_validator import validate_email
 from email_validator import EmailNotValidError
+from patterns.observer.observer import Observer
+from utility.file_utils import simulate_send_email
 
-class Client():
+class Client(Observer):
     """
     Description:
     This class will define all functions of a client.
@@ -116,3 +119,17 @@ class Client():
             initiated instance.
         """
         return self.__email_address
+
+    def update(self, message:str) -> None:
+        """
+        Description:
+            The method for updating the observer/subject letting them
+            know of activity within an account.
+
+        Args:
+            message (str): The message that is sent to the
+            observer/subject letting them know of action within the
+            account.
+        """
+        subject = f"ALERT: Unusual Activity: {datetime.date.today()}"
+        simulate_send_email(self.__email_address, subject, message)
