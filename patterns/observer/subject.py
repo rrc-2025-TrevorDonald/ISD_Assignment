@@ -5,6 +5,7 @@ __author__ = "Trevor Donald"
 __version__ = "1.0.0"
 
 from patterns.observer.observer import Observer
+from abc import abstractmethod
 
 class Subject(Observer):
     """
@@ -17,3 +18,30 @@ class Subject(Observer):
             The constructor for Subject class.
         """
         self._observers = Observer
+
+    @abstractmethod
+    def attach(self, observer:Observer) -> None:
+        """
+        Description:
+            Abstract method attach that will be implemented in the
+            concrete class BankAccount.
+        """
+        pass
+
+    @abstractmethod
+    def detach(self, observer:Observer) -> None:
+        """
+        Description:
+            Abstract method detach that will be implemented in the
+            concrete class BankAccount.
+        """
+        pass
+
+    @abstractmethod
+    def notify(self, observer:Observer) -> None:
+        """
+        Description:
+            Abstract method notify that will be implemented in the
+            concrete class BankAccount.
+        """
+        pass
