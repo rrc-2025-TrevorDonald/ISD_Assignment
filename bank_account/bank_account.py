@@ -227,3 +227,13 @@ class BankAccount(Subject, ABC):
             observer (Observer): The observer attached to the account.
         """
         self._observers.append(observer)
+
+    def detach(self, observer:Observer) -> None:
+        """
+        Description:
+            Detaches an observer from an account.
+
+        Args:
+            observer (Observer): The observer removed from an account.
+        """
+        self._observers.remove(observer)
