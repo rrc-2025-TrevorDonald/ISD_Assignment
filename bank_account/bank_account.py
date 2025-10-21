@@ -127,6 +127,10 @@ class BankAccount(Subject, ABC):
             ValueError(Amount must be of a numeric type.): When the
             amount entered is not of a numeric type.
         """
+        if amount > BankAccount.LARGE_TRANSACTION_THRESHOLD:
+            self.notify((f"Large transaction ${amount:,.2f}: on account "
+                         + f"{self.__account_number}."))
+
         if isinstance(amount, float):
             self.__balance += amount
         elif isinstance(amount, int):
@@ -134,6 +138,10 @@ class BankAccount(Subject, ABC):
             self.__balance += amount
         else:
             raise ValueError("Amount must be of a numeric type.")
+
+        if self.__balance < BankAccount.LOW_BALANCE_LEVEL:
+            self.notify((f"Low balance warning {self.__balance:,.2f}: on "
+                         + f"account {self.__account_number}."))
 
     def deposit(self, amount:float) -> None:
         """
