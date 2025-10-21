@@ -17,7 +17,7 @@ class Subject(Observer):
         Description:
             The constructor for Subject class.
         """
-        self._observers = Observer
+        self._observers = []
 
     @abstractmethod
     def attach(self, observer:Observer) -> None:

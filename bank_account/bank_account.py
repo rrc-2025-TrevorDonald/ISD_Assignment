@@ -6,14 +6,18 @@ __version__ = "1.0.0"
 
 from datetime import date
 from abc import ABC,abstractmethod
+from patterns.observer.subject import Subject
+from patterns.observer.observer import Observer
 
-class BankAccount(ABC):
+class BankAccount(Subject, ABC):
     """
     Description:
         Class that will define all BankAccount functions, it's also the
         "Parent/Superclass" for ChequingAccount, InvestmentAccount and
         SavingsAccount.
     """
+    LARGE_TRANSACTION_THRESHOLD = 9999.99
+    LOW_BALANCE_LEVEL = 50.0
     def __init__(self, account_number:int, client_number:int, balance:float,
                  date_created:date):
         """
@@ -35,6 +39,8 @@ class BankAccount(ABC):
             ValueError("Balance is not of a float type."): When the
             balance cannot be converted to a float if it is not already.
         """
+        super().__init__()
+
         if isinstance(account_number, int):
             self.__account_number = account_number
         else:
@@ -211,3 +217,13 @@ class BankAccount(ABC):
             Float: The service charge of the type of account.
         """
         pass
+
+    def attach(self, observer:Observer) -> None:
+        """
+        Description:
+            Attaches an observer to an account.
+
+        Args:
+            observer (Observer): The observer attached to the account.
+        """
+        self._observers.append(observer)
