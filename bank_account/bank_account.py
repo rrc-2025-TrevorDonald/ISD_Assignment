@@ -237,3 +237,15 @@ class BankAccount(Subject, ABC):
             observer (Observer): The observer removed from an account.
         """
         self._observers.remove(observer)
+
+    def notify(self, message:str) -> None:
+        """
+        Description:
+            Notifies all observers of a change that has happened to the
+            account they are observing.
+
+        Args:
+            message (str): The message relayed back to the observer.
+        """
+        for observer in self._observers:
+            observer.update(message)
