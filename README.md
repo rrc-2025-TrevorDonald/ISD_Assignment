@@ -48,3 +48,19 @@ account. The ManagementFeeStrategy handles the fee applied to investment account
 see if the account is more than 10 years old and handles the charge accordingly. Finally there is the
 MinimumBalanceStrategy the handles the fee applied to a savings account if they have less than the
 minimum balance and will apply the service charges accordingly.
+
+## Observer Pattern
+
+The observer pattern is being applied by adding the Observer as well as the subject class. The Client
+class inherits the Observer class and its abstract method update which is then used to hold the
+function for updating the initiated client with observed information once attached to observe an account.
+The Subject class holds a protected list containing all the clients set to observe the given account and
+3 abstract methods being attach, detach and notify. The bank account then inherits both the client class
+and the Subject class and implements all 3 methods from the subject class, the attach method adds the given
+observer(client) class given to the protected list, the detach method removes the given observer(client)
+class from the protected list, and the notify method which goes through all the observers within the
+protected observer list and calls the update method from client class. Finally within the update_balance
+method contained within the BankAccount class it calls the notify method when specific criteria are met
+making a fully automated notification system for alerts to an account. The criteria is set to call the
+notify method when a withdraw/deposit is more than $9999.99 and when an accounts balance falls below
+$50.00.
