@@ -4,8 +4,8 @@ File containing the Subject class of the Observer design pattern.
 __author__ = "Trevor Donald"
 __version__ = "1.0.0"
 
-from patterns.observer.observer import Observer
 from abc import abstractmethod
+from patterns.observer.observer import Observer
 
 class Subject(Observer):
     """
@@ -38,7 +38,7 @@ class Subject(Observer):
         pass
 
     @abstractmethod
-    def notify(self, observer:Observer) -> None:
+    def notify(self, message:str) -> None:
         """
         Description:
             Abstract method notify that will be implemented in the

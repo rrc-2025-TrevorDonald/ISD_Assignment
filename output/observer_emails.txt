@@ -1,0 +1,45 @@
+---
+To: Trevor.r.donald@academic.rrc.ca
+Subject: ALERT: Unusual Activity: 2025-10-21
+Message: Large transaction $10,000.00: on account 123.
+---
+---
+To: Trevor.r.donald@academic.rrc.ca
+Subject: ALERT: Unusual Activity: 2025-10-21
+Message: Large transaction $15,000.00: on account 321.
+---
+---
+To: Trevor.r.donald@academic.rrc.ca
+Subject: ALERT: Unusual Activity: 2025-10-21
+Message: Large transaction $-99,500.00: on account 123.
+---
+---
+To: Trevor.r.donald@academic.rrc.ca
+Subject: ALERT: Unusual Activity: 2025-10-21
+Message: Low balance warning 46.00: on account 123.
+---
+---
+To: Trevor.r.donald@academic.rrc.ca
+Subject: ALERT: Unusual Activity: 2025-10-21
+Message: Large transaction $-15,225.00: on account 321.
+---
+---
+To: Trevor.r.donald@academic.rrc.ca
+Subject: ALERT: Unusual Activity: 2025-10-21
+Message: Low balance warning 25.00: on account 321.
+---
+---
+To: hsimpson@gmail.com
+Subject: ALERT: Unusual Activity: 2025-10-21
+Message: Large transaction $100,000.00: on account 763.
+---
+---
+To: hsimpson@gmail.com
+Subject: ALERT: Unusual Activity: 2025-10-21
+Message: Large transaction $-100,070.00: on account 763.
+---
+---
+To: hsimpson@gmail.com
+Subject: ALERT: Unusual Activity: 2025-10-21
+Message: Low balance warning 8.00: on account 763.
+---

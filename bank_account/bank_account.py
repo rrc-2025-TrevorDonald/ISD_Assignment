@@ -5,11 +5,12 @@ __author__ = "Trevor Donald"
 __version__ = "1.0.0"
 
 from datetime import date
-from abc import ABC,abstractmethod
+from abc import ABC, abstractmethod
 from patterns.observer.subject import Subject
 from patterns.observer.observer import Observer
+from client.client import Client
 
-class BankAccount(Subject, ABC):
+class BankAccount(Subject, Client, ABC):
     """
     Description:
         Class that will define all BankAccount functions, it's also the
@@ -131,6 +132,10 @@ class BankAccount(Subject, ABC):
             self.notify((f"Large transaction ${amount:,.2f}: on account "
                          + f"{self.__account_number}."))
 
+        if amount < -BankAccount.LARGE_TRANSACTION_THRESHOLD:
+            self.notify((f"Large transaction ${amount:,.2f}: on account "
+                         + f"{self.__account_number}."))
+
         if isinstance(amount, float):
             self.__balance += amount
         elif isinstance(amount, int):
@@ -162,12 +167,12 @@ class BankAccount(Subject, ABC):
         if isinstance(amount, float):
             if amount <= 0:
                 raise ValueError(f"Deposit amount: {amount} must be positive.")
-            self.__balance += amount
+            self.update_balance(amount)
         elif isinstance(amount, int):
             if amount <= 0:
                 raise ValueError(f"Deposit amount: {amount} must be positive.")
             amount = float(amount)
-            self.__balance += amount
+            self.update_balance(amount)
         else:
             raise ValueError("Amount must be of a numeric type.")
 
@@ -199,7 +204,7 @@ class BankAccount(Subject, ABC):
             if amount > self.__balance:
                 raise ValueError(f"Withdraw amount: {amount} must not exceed" /
                                 f" the account balance: {self.__balance}.")
-            self.__balance -= amount
+            self.update_balance(-amount)
         elif isinstance(amount, int):
             if amount <= 0:
                 raise ValueError(f"Withdraw amount: {amount}" \
@@ -209,7 +214,7 @@ class BankAccount(Subject, ABC):
                 raise ValueError(f"Withdraw amount: {amount} must not exceed" \
                                 f" the account balance: {self.__balance}.")
             amount = float(amount)
-            self.__balance -= amount
+            self.update_balance(-amount)
         else:
             raise ValueError(f"Withdraw amount: {amount} must be numeric.")
 
@@ -255,5 +260,5 @@ class BankAccount(Subject, ABC):
         Args:
             message (str): The message relayed back to the observer.
         """
-        for observer in self._observers:
-            observer.update(message)
+        for subscriber in self._observers:
+            subscriber.update(message)
