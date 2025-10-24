@@ -36,10 +36,15 @@ class ManagementFeeStrategy(ServiceChargeStrategy):
             The method used for calculating the Management fee.
 
         Args:
-            account (BankAccount): The bank account used to apply the
-            management fee charge to.
+            account (BankAccount): Because the date created is within
+            the constructor and is already being passed we are not
+            making use of the account argument in this method.
+
+        Returns:
+            service_charges (float): The service charges of the given
+            account.
         """
-        if self.__date_created < ManagementFeeStrategy.TEN_YEARS_AGO:
+        if self.__date_created <= ManagementFeeStrategy.TEN_YEARS_AGO:
             service_charges = ServiceChargeStrategy.BASE_SERVICE_CHARGE + 0
         else:
             service_charges = (ServiceChargeStrategy.BASE_SERVICE_CHARGE +

@@ -25,6 +25,9 @@ class Subject(Observer):
         Description:
             Abstract method attach that will be implemented in the
             concrete class BankAccount.
+
+        Returns:
+            None
         """
         pass
 
@@ -34,6 +37,9 @@ class Subject(Observer):
         Description:
             Abstract method detach that will be implemented in the
             concrete class BankAccount.
+
+        Returns:
+            None
         """
         pass
 
@@ -43,5 +49,8 @@ class Subject(Observer):
         Description:
             Abstract method notify that will be implemented in the
             concrete class BankAccount.
+
+        Returns:
+            None
         """
         pass

@@ -21,5 +21,8 @@ class ServiceChargeStrategy(ABC):
         Description:
             Abstract method thats going to be implemented within the
             "Child/Sub" classes.
+
+        Returns:
+            float(): Will be returned in Child/Sub classes.            
         """
         pass

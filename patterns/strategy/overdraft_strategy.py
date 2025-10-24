@@ -36,6 +36,10 @@ class OverdraftStrategy(ServiceChargeStrategy):
         Args:
             account (BankAccount): The bank account used to apply the
             overdraft charge to.
+
+        Returns:
+            service_charges (float): The service charges of the given
+            account.
         """
         if account.balance < self.__overdraft_limit:
             service_charges = (ServiceChargeStrategy.BASE_SERVICE_CHARGE +

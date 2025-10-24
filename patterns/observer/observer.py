@@ -18,5 +18,8 @@ class Observer(ABC):
         Description:
             Abstract method of update that will be used for Client
             class.
+
+        Returns:
+            None
         """
         pass
