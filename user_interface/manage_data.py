@@ -70,7 +70,7 @@ def load_data()->tuple[dict,dict]:
                 client_listing[client_number] = Client(int(client_number),
                         first_name, last_name, email)
             except:
-                logging.error("Unable to create client: First Name cannot"
+                logging.error("Unable to create client: First Name cannot "
                               + "be blank.")
 
     # READ ACCOUNT DATA
@@ -100,13 +100,15 @@ def load_data()->tuple[dict,dict]:
                 if listed_account.client_number in client_listing:
                     accounts[account_number] = listed_account
                 else:
-                    logging.error(f"Bank Account: {account_number} contains"
+                    logging.error(f"Bank Account: {account_number} contains "
                                   + f" invalid Client Number: {client_number}")
             except:
-                logging.error("Unable to create bank account: could not"
+                logging.error("Unable to create bank account: could not "
                               + "convert string to float: 'ten'")
     # RETURN STATEMENT
-    
+    heres_your_tuple = (client_listing, accounts)
+
+    return heres_your_tuple
 
 
 def update_data(updated_account: BankAccount) -> None:
