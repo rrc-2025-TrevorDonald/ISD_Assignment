@@ -10,6 +10,8 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import csv
 from datetime import datetime
 import logging
+from bank_account import *
+from client.client import Client
 
 # *******************************************************************************
 # GIVEN LOGGING AND FILE ACCESS CODE
@@ -61,12 +63,20 @@ def load_data()->tuple[dict,dict]:
     # READ CLIENT DATA 
     with open(clients_csv_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
-        
+        for line in reader:
+            try:
+                client_number, first_name, last_name, email =  \
+                    line.strip().split(",")
+                client_listing[client_number] = Client(int(client_number),
+                        first_name, last_name, email)
+            except:
+                logging.error("Unable to create client: First Name cannot"
+                              + "be blank.")
 
     # READ ACCOUNT DATA
     with open(accounts_csv_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)  
-
+        
     # RETURN STATEMENT
     
 
