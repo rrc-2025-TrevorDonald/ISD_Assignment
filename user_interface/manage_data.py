@@ -4,7 +4,7 @@ __credits__ = ""
 
 import os
 import sys
-# THIS LINE IS NEEDED SO THAT THE GIVEN TESTING 
+# THIS LINE IS NEEDED SO THAT THE GIVEN TESTING
 # CODE CAN RUN FROM THIS DIRECTORY.
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import csv
@@ -13,42 +13,39 @@ import logging
 from bank_account import *
 from client.client import Client
 
-# *******************************************************************************
+# **********************************************************************
 # GIVEN LOGGING AND FILE ACCESS CODE
- 
+
 # Absolute path to root of directory
 root_dir = os.path.dirname(os.path.dirname(__file__))
- 
+
 # Path to the log directory relative to the root directory
 log_dir = os.path.join(root_dir, 'logs')
- 
+
 # Create the log directory if it doesn't exist
 os.makedirs(log_dir, exist_ok = True)
- 
+
 # Specify the path to the log file within the log directory
 log_file_path = os.path.join(log_dir, 'manage_data.log')
- 
+
 # Configure logging to use the specified log file
 logging.basicConfig(filename=log_file_path, filemode='a',
                     format='%(name)s - %(levelname)s - %(message)s\n\n')
- 
-# Given File Path Code:
-# Designed to locate the input files without providing any directory structure
 
-# Construct the absolute path to the data directory at the root of the project
+# Given File Path Code:
+# Designed to locate the input files without providing any directory
+# structure
+
+# Construct the absolute path to the data directory at the root of the
+# project
 data_dir = os.path.join(root_dir, 'data')
- 
+
 # Construct the absolute paths to the data files
 clients_csv_path = os.path.join(data_dir, 'clients.csv')
 accounts_csv_path = os.path.join(data_dir, 'accounts.csv')
- 
+
 # END GIVEN LOGGING AND FILE ACCESS CODE
-# *******************************************************************************
-
-
-
-
-
+# **********************************************************************
 
 def load_data()->tuple[dict,dict]:
     """
@@ -60,48 +57,47 @@ def load_data()->tuple[dict,dict]:
     client_listing = {}
     accounts = {}
 
-    # READ CLIENT DATA 
+    # READ CLIENT DATA
     with open(clients_csv_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
-        for line in reader:
+        for row in reader:
             try:
-                client_number, first_name, last_name, email =  \
-                    line.strip().split(",")
-                client_listing[client_number] = Client(int(client_number),
-                        first_name, last_name, email)
+                client_listing[row["client_number"]] = Client(
+                    int(row["client_number"]), row["first_name"],
+                    row["last_name"], row["email_address"])
             except:
                 logging.error("Unable to create client: First Name cannot "
                               + "be blank.")
 
     # READ ACCOUNT DATA
     with open(accounts_csv_path, newline='') as csvfile:
-        reader = csv.DictReader(csvfile)  
-        for line in reader:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
             try:
-                account_number, client_number, balance, date_created, \
-                account_type, overdraft_limit, overdraft_rate, \
-                minimum_balance, management_fee = line.strip().split(",")
-                if account_type == "ChequingAccount":
+                if row["account_type"] == "ChequingAccount":
                     listed_account = ChequingAccount(
-                        int(account_number), int(client_number), int(balance),
-                        date_created, int(overdraft_limit),
-                        int(overdraft_rate))
-                elif account_type == "InvestmentAccount":
+                        int(row["account_number"]), int(row["client_number"]),
+                        int(row["balance"]), row["date_created"],
+                        int(row["overdraft_limit"]), int(["overdraft_rate"]))
+                elif row["account_type"] == "InvestmentAccount":
                     listed_account = InvestmentAccount(
-                        int(account_number), int(client_number), int(balance),
-                        date_created, int(management_fee))
-                elif account_type == "SavingsAccount":
+                        int(row["account_number"]), int(row["client_number"]),
+                        int(row["balance"]), row["date_created"],
+                        int(row["management_fee"]))
+                elif row["account_type"] == "SavingsAccount":
                     listed_account = SavingsAccount(
-                        int(account_number), int(client_number), int(balance),
-                        date_created, int(minimum_balance))
+                        int(row["account_number"]), int(row["client_number"]),
+                        int(row["balance"]), row["date_created"],
+                        int(row["minimum_balance"]))
                 else:
                     raise ValueError("No a valid account type.")
-
+                print(listed_account)
                 if listed_account.client_number in client_listing:
-                    accounts[account_number] = listed_account
+                    accounts[row["account_number"]] = listed_account
                 else:
-                    logging.error(f"Bank Account: {account_number} contains "
-                                  + f" invalid Client Number: {client_number}")
+                    logging.error(f"Bank Account: {row["account_number"]}"
+                                    + " contains invalid Client Number: "
+                                    + f"{row["client_number"]}")
             except:
                 logging.error("Unable to create bank account: could not "
                               + "convert string to float: 'ten'")
@@ -116,19 +112,21 @@ def update_data(updated_account: BankAccount) -> None:
     A function to update the accounts.csv file with balance 
     data provided in the BankAccount argument.
     Args:
-        updated_account (BankAccount): A bank account containing an updated balance.
+        updated_account (BankAccount): A bank account containing an
+        updated balance.
     """
     updated_rows = []
 
     with open(accounts_csv_path, mode='r', newline='') as file:
         reader = csv.DictReader(file)
         fields = reader.fieldnames
-        
+
         for row in reader:
             account_number = int(row['account_number'])
             # Check if the account number is in the dictionary
             if account_number == updated_account.account_number:
-                # Update the balance column with the new balance from the dictionary
+                # Update the balance column with the new balance from
+                # the dictionary
                 row['balance'] = updated_account.balance
             updated_rows.append(row)
 
@@ -137,7 +135,6 @@ def update_data(updated_account: BankAccount) -> None:
         writer = csv.DictWriter(file, fieldnames=fields)
         writer.writeheader()
         writer.writerows(updated_rows)
-
 
 # GIVEN TESTING SECTION:
 if __name__ == "__main__":
@@ -151,3 +148,4 @@ if __name__ == "__main__":
             if account.client_number == client.client_number:
                 print(f"{account}\n")
         print("=========================================")
+    
