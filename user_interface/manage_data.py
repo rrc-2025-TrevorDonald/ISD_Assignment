@@ -76,7 +76,35 @@ def load_data()->tuple[dict,dict]:
     # READ ACCOUNT DATA
     with open(accounts_csv_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)  
-        
+        for line in reader:
+            try:
+                account_number, client_number, balance, date_created, \
+                account_type, overdraft_limit, overdraft_rate, \
+                minimum_balance, management_fee = line.strip().split(",")
+                if account_type == "ChequingAccount":
+                    listed_account = ChequingAccount(
+                        int(account_number), int(client_number), int(balance),
+                        date_created, int(overdraft_limit),
+                        int(overdraft_rate))
+                elif account_type == "InvestmentAccount":
+                    listed_account = InvestmentAccount(
+                        int(account_number), int(client_number), int(balance),
+                        date_created, int(management_fee))
+                elif account_type == "SavingsAccount":
+                    listed_account = SavingsAccount(
+                        int(account_number), int(client_number), int(balance),
+                        date_created, int(minimum_balance))
+                else:
+                    raise ValueError("No a valid account type.")
+
+                if listed_account.client_number in client_listing:
+                    accounts[account_number] = listed_account
+                else:
+                    logging.error(f"Bank Account: {account_number} contains"
+                                  + f" invalid Client Number: {client_number}")
+            except:
+                logging.error("Unable to create bank account: could not"
+                              + "convert string to float: 'ten'")
     # RETURN STATEMENT
     
 
