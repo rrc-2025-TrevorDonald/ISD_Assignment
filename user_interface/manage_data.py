@@ -65,9 +65,8 @@ def load_data()->tuple[dict,dict]:
                 client_listing[row["client_number"]] = Client(
                     int(row["client_number"]), row["first_name"],
                     row["last_name"], row["email_address"])
-            except:
-                logging.error("Unable to create client: First Name cannot "
-                              + "be blank.")
+            except Exception as e:
+                logging.error(f"Unable to create client: {e}")
 
     # READ ACCOUNT DATA
     with open(accounts_csv_path, newline='') as csvfile:
@@ -77,30 +76,29 @@ def load_data()->tuple[dict,dict]:
                 if row["account_type"] == "ChequingAccount":
                     listed_account = ChequingAccount(
                         int(row["account_number"]), int(row["client_number"]),
-                        int(row["balance"]), row["date_created"],
-                        int(row["overdraft_limit"]), int(["overdraft_rate"]))
+                        float(row["balance"]), row["date_created"],
+                        float(row["overdraft_limit"]), float(row["overdraft_rate"]))
                 elif row["account_type"] == "InvestmentAccount":
                     listed_account = InvestmentAccount(
                         int(row["account_number"]), int(row["client_number"]),
-                        int(row["balance"]), row["date_created"],
-                        int(row["management_fee"]))
+                        float(row["balance"]), row["date_created"],
+                        float(row["management_fee"]))
                 elif row["account_type"] == "SavingsAccount":
                     listed_account = SavingsAccount(
                         int(row["account_number"]), int(row["client_number"]),
-                        int(row["balance"]), row["date_created"],
-                        int(row["minimum_balance"]))
+                        float(row["balance"]), row["date_created"],
+                        float(row["minimum_balance"]))
                 else:
                     raise ValueError("No a valid account type.")
-                print(listed_account)
-                if listed_account.client_number in client_listing:
+
+                if row["client_number"] in client_listing:
                     accounts[row["account_number"]] = listed_account
                 else:
                     logging.error(f"Bank Account: {row["account_number"]}"
                                     + " contains invalid Client Number: "
                                     + f"{row["client_number"]}")
-            except:
-                logging.error("Unable to create bank account: could not "
-                              + "convert string to float: 'ten'")
+            except Exception as e:
+                logging.error(f"Unable to create bank account: {e}")
     # RETURN STATEMENT
     heres_your_tuple = (client_listing, accounts)
 
