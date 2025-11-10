@@ -64,3 +64,5 @@ method contained within the BankAccount class it calls the notify method when sp
 making a fully automated notification system for alerts to an account. The criteria is set to call the
 notify method when a withdraw/deposit is more than $9999.99 and when an accounts balance falls below
 $50.00.
+
+Assignment 04: 
