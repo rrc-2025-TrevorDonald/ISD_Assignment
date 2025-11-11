@@ -79,7 +79,7 @@ class LookupWindow(QMainWindow):
         layout.addWidget(self.filter_button, 6, 2)
 
         self.account_table.setColumnCount(4)
-        self.account_table.setHorizontalHeaderLabels(COLUMN_HEADERS)             
+        self.account_table.setHorizontalHeaderLabels(COLUMN_HEADERS)
         self.account_table.horizontalHeader().setFont(bold_font)
         self.account_table.resizeColumnsToContents()
         self.account_table.resizeRowsToContents()
