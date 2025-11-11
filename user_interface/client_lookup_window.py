@@ -3,7 +3,7 @@ __version__ = "1.0.0"
 __credits__ = ""
 
 from bank_account import *
-from PySide6.QtWidgets import QTableWidgetItem, QMessageBox
+from PySide6.QtWidgets import QTableWidgetItem, QMessageBox, QTableWidget
 from PySide6.QtCore import Qt, Slot
 
 from ui_superclasses.lookup_window import LookupWindow
@@ -25,22 +25,24 @@ class ClientLookupWindow(LookupWindow):
         """
         super().__init__()
 
-        tuple_data = load_data()
-        self.__client_listing = tuple_data[0]
-        self.__accounts = tuple_data[1]
+        tuple_dict = load_data()
+        self.__client_listing = tuple_dict[0]
+        self.__accounts = tuple_dict[1]
 
         self.lookup_button.clicked.connect(self.__on_lookup_client)
-        self.client_number_edit.textChanged.connect(self.__on_text_changed)
-        self.account_table.cellClicked.connect(self.__on_select_account)
+        # self.client_number_edit.textChanged.connect(self.__on_text_changed)
+        # self.account_table.cellClicked.connect(self.__on_select_account)
 
     @Slot()
     def __on_lookup_client(self) -> None:
         """
         """
-        entered_client_number = self.client_number_edit.value
+        entered_client_number = self.client_number_edit.text()
+        print(entered_client_number)
+        print(self.__client_listing)
 
         try:
-            entered_client_number = int(entered_client_number)
+            entered_client_number_int = int(entered_client_number)
         except:
             input_error_prompt = QMessageBox.information(None, "Input Error",
                                 "The client number must be a numeric value.",
@@ -51,7 +53,14 @@ class ClientLookupWindow(LookupWindow):
         if entered_client_number not in self.__client_listing:
             client_not_found = QMessageBox.information(None, "Not Fount",
                                 f"Client Number: {entered_client_number}"
-                                + "not found", QMessageBox.Yes,
+                                + " not found", QMessageBox.Yes,
                                 QMessageBox.Yes)
             if client_not_found == QMessageBox.Yes:
                 self.reset_display()
+        else:
+            chosen_client = self.__client_listing[entered_client_number]
+            self.client_info_label.setText(
+                f"Client Name: {chosen_client.first_name} "
+                + f"{chosen_client.last_name}"
+            )
+
