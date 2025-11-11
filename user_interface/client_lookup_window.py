@@ -38,8 +38,6 @@ class ClientLookupWindow(LookupWindow):
         """
         """
         entered_client_number = self.client_number_edit.text()
-        print(entered_client_number)
-        print(self.__client_listing)
 
         try:
             entered_client_number_int = int(entered_client_number)
@@ -64,3 +62,22 @@ class ClientLookupWindow(LookupWindow):
                 + f"{chosen_client.last_name}"
             )
 
+            for key in self.__accounts:
+                if self.__accounts[key].client_number == \
+                    entered_client_number_int:
+                    rows = QTableWidget.rowCount(self.account_table)
+                    self.account_table.insertRow(rows)
+
+                    account_number = QTableWidgetItem(
+                        str(self.__accounts[key].account_number))
+                    balance = QTableWidgetItem(
+                        f"{self.__accounts[key].balance:,.2f}")
+                    date_created = QTableWidgetItem(
+                        str(self.__accounts[key]._date_created))
+                    account_type = QTableWidgetItem(
+                        str(self.__accounts[key].__class__.__name__))
+
+                    self.account_table.setItem(rows, 0, account_number)
+                    self.account_table.setItem(rows, 1, balance)
+                    self.account_table.setItem(rows, 2, date_created)
+                    self.account_table.setItem(rows, 3, account_type)
