@@ -9,17 +9,19 @@ class LookupWindow(QMainWindow):
     """
     A Python class which allows users to retrieve Client 
     information.
-    """    
+    """
 
     def __init__(self):
         """
         Initializes the Client Lookup window by adding 
-        various widgets and setting properties. Widgets include: client_number_edit, 
-        client_info_label, lookup_button and account_table.
+        various widgets and setting properties. Widgets include:
+        client_number_edit, client_info_label, lookup_button and
+        account_table.
         """
         super().__init__()
 
-        COLUMN_HEADERS = ["Account Number", "Balance", "Date Created", "Account Type"]
+        COLUMN_HEADERS = ["Account Number", "Balance", "Date Created",
+                          "Account Type"]
 
         self.setWindowTitle("Client Lookup")
         self.resize(600, 400) 
@@ -54,19 +56,21 @@ class LookupWindow(QMainWindow):
         self.filter_combo_box.addItems(COLUMN_HEADERS)
         self.filter_button = QPushButton("Apply Filter")
 
-        # Adjusting layout to make widgets centered in the middle column of a 3-column layout
+        # Adjusting layout to make widgets centered in the middle column
+        # of a 3-column layout
         layout.setColumnStretch(0, 1)
         layout.setColumnStretch(2, 1)
 
-        # Add widgets to the layout, placing them in the second (middle) column
+        # Add widgets to the layout, placing them in the second (middle)
+        # column
         layout.addWidget(self.prompt_label, 0, 1)
         layout.addWidget(self.client_number_edit, 1, 1)
         layout.addWidget(self.lookup_button, 2, 1)
         layout.addWidget(self.client_info_label, 3, 1)
 
-        
+
         # Table (for BankAccount data) span all columns
-        layout.addWidget(self.account_table, 4, 0, 1, 3)  
+        layout.addWidget(self.account_table, 4, 0, 1, 3)
 
         # Add Assignment 5 Widgets
         layout.addWidget(self.filter_label, 5, 0)
@@ -75,7 +79,7 @@ class LookupWindow(QMainWindow):
         layout.addWidget(self.filter_button, 6, 2)
 
         self.account_table.setColumnCount(4)
-        self.account_table.setHorizontalHeaderLabels(COLUMN_HEADERS)                
+        self.account_table.setHorizontalHeaderLabels(COLUMN_HEADERS)             
         self.account_table.horizontalHeader().setFont(bold_font)
         self.account_table.resizeColumnsToContents()
         self.account_table.resizeRowsToContents()
@@ -86,8 +90,9 @@ class LookupWindow(QMainWindow):
         """
         Resets the display.
 
-        This function Clears contents of display fields client_number_edit, client_info_label 
-        and account_table, and resets focus to the client_number_edit.
+        This function Clears contents of display fields
+        client_number_edit, client_info_label and account_table, and
+        resets focus to the client_number_edit.
 
             reset_display()
 
@@ -103,6 +108,3 @@ class LookupWindow(QMainWindow):
         self.filter_edit.setEnabled(False)
         self.filter_button.setEnabled(False)
         self.filter_label.setEnabled(False)
-
-
-   

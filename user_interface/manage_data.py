@@ -146,4 +146,3 @@ if __name__ == "__main__":
             if account.client_number == client.client_number:
                 print(f"{account}\n")
         print("=========================================")
-    
