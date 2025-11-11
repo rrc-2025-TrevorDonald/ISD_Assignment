@@ -30,7 +30,7 @@ class ClientLookupWindow(LookupWindow):
         self.__accounts = tuple_dict[1]
 
         self.lookup_button.clicked.connect(self.__on_lookup_client)
-        # self.client_number_edit.textChanged.connect(self.__on_text_changed)
+        self.client_number_edit.textChanged.connect(self.__on_text_changed)
         # self.account_table.cellClicked.connect(self.__on_select_account)
 
     @Slot()
@@ -81,3 +81,9 @@ class ClientLookupWindow(LookupWindow):
                     self.account_table.setItem(rows, 1, balance)
                     self.account_table.setItem(rows, 2, date_created)
                     self.account_table.setItem(rows, 3, account_type)
+
+    @Slot()
+    def __on_text_changed(self) -> None:
+        """
+        """
+        self.account_table.setRowCount(0)
