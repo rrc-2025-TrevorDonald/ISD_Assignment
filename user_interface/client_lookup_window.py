@@ -4,7 +4,7 @@ __credits__ = ""
 
 from bank_account import *
 from PySide6.QtWidgets import QTableWidgetItem, QMessageBox, QTableWidget
-from PySide6.QtCore import Qt, Slot
+from PySide6.QtCore import Qt, Slot, QObject, Signal, SignalInstance
 
 from ui_superclasses.lookup_window import LookupWindow
 from user_interface.account_details_window import AccountDetailsWindow
@@ -102,9 +102,21 @@ class ClientLookupWindow(LookupWindow):
             focused_account = self.__accounts[selected_account_number]
 
             account_detail = AccountDetailsWindow(focused_account)
+            account_detail.balance_updated.connect(self.__update_data)
             account_detail.exec_()
 
         else:
             QMessageBox.information(None, "No Bank Account",
             "Bank Account selected does not exist.", QMessageBox.Yes,
             QMessageBox.Yes)
+
+    @Slot(BankAccount)
+    def __update_data(self, account:BankAccount):
+        """
+        """
+        for row in range(self.account_table.rowCount()):
+            if self.account_table.item(row, 0).text() == \
+                str(account.account_number):
+                this_account = self.account_table.item(row, 0).text()
+                self.__accounts[this_account] = account
+                update_data(account)
