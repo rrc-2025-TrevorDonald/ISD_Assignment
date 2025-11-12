@@ -28,9 +28,36 @@ class AccountDetailsWindow(DetailsWindow):
                 str(self.__account.account_number))
             self.balance_label.setText(f"${self.__account.balance:,.2f}")
 
-            self.deposit_button.clicked.connect(__on_apply_transaction)
-            self.withdraw_button.clicked.connect(__on_apply_transaction)
-            self.exit_button.clicked.connect(__on_exit)
+            self.deposit_button.clicked.connect(self.__on_apply_transaction)
+            self.withdraw_button.clicked.connect(self.__on_apply_transaction)
+            self.exit_button.clicked.connect(self.__on_exit)
         else:
             self.reject()
 
+    @Slot()
+    def __on_apply_transaction(self):
+        """
+        """
+        try:
+            edit_amount = float(self.transaction_amount_edit.text())
+        except:
+            QMessageBox.information(None, "Invalid Data",
+            "Amount must be numeric.", QMessageBox.Yes, QMessageBox.Yes)
+            self.transaction_amount_edit.focus()
+
+        try:
+            if self.sender(self.deposit_button):
+                transaction_type = "Deposit"
+                self.__account.deposit(edit_amount)
+            elif self.sender(self.withdraw_button):
+                transaction_type = "Withdraw"
+                self.__account.withdraw(edit_amount)
+
+            self.balance_label.setText(f"${self.__account.balance:,.2f}")
+            self.transaction_amount_edit.setText("")
+            self.transaction_amount_edit.focus()
+        except Exception as e:
+            QMessageBox.information(None, f"{transaction_type} Failed",
+            f"e", QMessageBox.Yes, QMessageBox.Yes)
+            self.transaction_amount_edit.setText("")
+            self.transaction_amount_edit.focus()
