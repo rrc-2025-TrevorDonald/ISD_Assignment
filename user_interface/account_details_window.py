@@ -1,6 +1,6 @@
 __author__ = "ACE Faculty"
 __version__ = "1.0.0"
-__credits__ = ""
+__credits__ = "Trevor Donald"
 
 from ui_superclasses.details_window import DetailsWindow
 from PySide6.QtWidgets import QMessageBox
@@ -36,16 +36,29 @@ class AccountDetailsWindow(DetailsWindow):
             self.reject()
 
     @Slot()
-    def __on_apply_transaction(self):
+    def __on_apply_transaction(self) -> None:
         """
+        Description:
+            This method is responsible for applying a transaction to the
+            given BankAccount received by the __on_select_account from
+            the client lookup window. It will take the amount inputted
+            into the transaction_amount_edit input and either deposit
+            or withdraw that value depending on if the user click the
+            deposit or withdraw button. It then emits the signal back
+            to the client lookup window for the __update_data method to
+            run and update the table and csv file with the changes.
+
+        Returns:
+            None
         """
         try:
             edit_amount = float(self.transaction_amount_edit.text())
         except:
-            QMessageBox.information(None, "Invalid Data",
-            "Amount must be numeric.", QMessageBox.Yes, QMessageBox.Yes)
+            QMessageBox.information(self, "Invalid Data",
+            "Amount must be numeric.")
             self.transaction_amount_edit.setFocus()
-            
+            return
+
         try:
             if self.sender() == self.deposit_button:
                 transaction_type = "Deposit"
@@ -61,12 +74,18 @@ class AccountDetailsWindow(DetailsWindow):
             self.balance_updated.emit(self.__account)
         except Exception as e:
             QMessageBox.information(self, f"{self.sender().text()} Failed",
-            f"{e}", QMessageBox.Yes, QMessageBox.Yes)
+            f"{e}")
             self.transaction_amount_edit.setText("")
             self.transaction_amount_edit.setFocus()
 
     @Slot()
     def __on_exit(self) -> None:
         """
+        Description:
+            This method is responsible for closing the account detail
+            window whenever it is called.
+
+        Returns:
+            None
         """
         self.close()

@@ -1,6 +1,6 @@
 __author__ = "ACE Faculty"
 __version__ = "1.0.0"
-__credits__ = ""
+__credits__ = "Trevor Donald"
 
 import os
 import sys
@@ -101,9 +101,9 @@ def load_data()->tuple[dict,dict]:
                 logging.error(f"Unable to create bank account: {e}")
 
     # RETURN STATEMENT
-    heres_your_tuple = (client_listing, accounts)
+    tuple_dictionary = (client_listing, accounts)
 
-    return heres_your_tuple
+    return tuple_dictionary
 
 
 def update_data(updated_account: BankAccount) -> None:

@@ -1,6 +1,6 @@
 __author__ = "ACE Faculty"
 __version__ = "1.0.0"
-__credits__ = ""
+__credits__ = " Trevor Donald"
 
 # REQUIREMENT - add import statements
 from user_interface.client_lookup_window import ClientLookupWindow
