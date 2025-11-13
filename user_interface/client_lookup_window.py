@@ -41,46 +41,47 @@ class ClientLookupWindow(LookupWindow):
 
         try:
             entered_client_number_int = int(entered_client_number)
-        except:
-            input_error_prompt = QMessageBox.information(None, "Input Error",
-                                "The client number must be a numeric value.",
-                                QMessageBox.Yes, QMessageBox.Yes)
-            if input_error_prompt == QMessageBox.Yes:
-                self.reset_display()
 
-        if entered_client_number not in self.__client_listing:
-            client_not_found = QMessageBox.information(None, "Not Fount",
-                                f"Client Number: {entered_client_number}"
-                                + " not found", QMessageBox.Yes,
-                                QMessageBox.Yes)
-            if client_not_found == QMessageBox.Yes:
-                self.reset_display()
-        else:
-            chosen_client = self.__client_listing[entered_client_number]
-            self.client_info_label.setText(
-                f"Client Name: {chosen_client.first_name} "
-                + f"{chosen_client.last_name}"
-            )
+            if entered_client_number not in self.__client_listing:
+                client_not_found = QMessageBox.information(None, "Not Fount",
+                                    f"Client Number: {entered_client_number}"
+                                    + " not found", QMessageBox.Yes,
+                                    QMessageBox.Yes)
+                if client_not_found == QMessageBox.Yes:
+                    self.reset_display()
+            else:
+                chosen_client = self.__client_listing[entered_client_number]
+                self.client_info_label.setText(
+                    f"Client Name: {chosen_client.first_name} "
+                    + f"{chosen_client.last_name}"
+                )
 
-            for key in self.__accounts:
-                if self.__accounts[key].client_number == \
+            for key in self.__accounts.items():
+                if key[1].client_number == \
                     entered_client_number_int:
                     rows = QTableWidget.rowCount(self.account_table)
                     self.account_table.insertRow(rows)
 
                     account_number = QTableWidgetItem(
-                        str(self.__accounts[key].account_number))
+                        str(key[1].account_number))
                     balance = QTableWidgetItem(
-                        f"{self.__accounts[key].balance:,.2f}")
+                        f"{key[1].balance:,.2f}")
                     date_created = QTableWidgetItem(
-                        str(self.__accounts[key]._date_created))
+                        str(key[1]._date_created))
                     account_type = QTableWidgetItem(
-                        str(self.__accounts[key].__class__.__name__))
+                        str(key[1].__class__.__name__))
 
                     self.account_table.setItem(rows, 0, account_number)
                     self.account_table.setItem(rows, 1, balance)
                     self.account_table.setItem(rows, 2, date_created)
                     self.account_table.setItem(rows, 3, account_type)
+
+        except ValueError:
+            input_error_prompt = QMessageBox.information(None, "Input Error",
+                                "The client number must be a numeric value.",
+                                QMessageBox.Yes, QMessageBox.Yes)
+            if input_error_prompt == QMessageBox.Yes:
+                self.reset_display()
 
     @Slot()
     def __on_text_changed(self) -> None:

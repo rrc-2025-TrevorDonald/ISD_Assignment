@@ -45,7 +45,7 @@ class AccountDetailsWindow(DetailsWindow):
             QMessageBox.information(None, "Invalid Data",
             "Amount must be numeric.", QMessageBox.Yes, QMessageBox.Yes)
             self.transaction_amount_edit.setFocus()
-
+            
         try:
             if self.sender() == self.deposit_button:
                 transaction_type = "Deposit"
@@ -60,7 +60,7 @@ class AccountDetailsWindow(DetailsWindow):
 
             self.balance_updated.emit(self.__account)
         except Exception as e:
-            QMessageBox.information(None, f"{self.sender().text()} Failed",
+            QMessageBox.information(self, f"{self.sender().text()} Failed",
             f"{e}", QMessageBox.Yes, QMessageBox.Yes)
             self.transaction_amount_edit.setText("")
             self.transaction_amount_edit.setFocus()

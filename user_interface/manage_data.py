@@ -99,6 +99,7 @@ def load_data()->tuple[dict,dict]:
                                     + f"{row["client_number"]}")
             except Exception as e:
                 logging.error(f"Unable to create bank account: {e}")
+
     # RETURN STATEMENT
     heres_your_tuple = (client_listing, accounts)
 
