@@ -77,7 +77,8 @@ def load_data()->tuple[dict,dict]:
                     listed_account = ChequingAccount(
                         int(row["account_number"]), int(row["client_number"]),
                         float(row["balance"]), row["date_created"],
-                        float(row["overdraft_limit"]), float(row["overdraft_rate"]))
+                        float(row["overdraft_limit"]),
+                        float(row["overdraft_rate"]))
                 elif row["account_type"] == "InvestmentAccount":
                     listed_account = InvestmentAccount(
                         int(row["account_number"]), int(row["client_number"]),

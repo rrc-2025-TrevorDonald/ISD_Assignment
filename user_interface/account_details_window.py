@@ -34,7 +34,6 @@ class AccountDetailsWindow(DetailsWindow):
             self.exit_button.clicked.connect(self.__on_exit)
         else:
             self.reject()
-
     @Slot()
     def __on_apply_transaction(self) -> None:
         """
@@ -53,7 +52,7 @@ class AccountDetailsWindow(DetailsWindow):
         """
         try:
             edit_amount = float(self.transaction_amount_edit.text())
-        except:
+        except ValueError:
             QMessageBox.information(self, "Invalid Data",
             "Amount must be numeric.")
             self.transaction_amount_edit.setFocus()
@@ -73,8 +72,9 @@ class AccountDetailsWindow(DetailsWindow):
 
             self.balance_updated.emit(self.__account)
         except Exception as e:
-            QMessageBox.information(self, f"{self.sender().text()} Failed",
+            QMessageBox.information(self, f"{transaction_type} Failed",
             f"{e}")
+            print(e)
             self.transaction_amount_edit.setText("")
             self.transaction_amount_edit.setFocus()
 

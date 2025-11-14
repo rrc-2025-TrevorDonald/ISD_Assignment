@@ -198,21 +198,21 @@ class BankAccount(Subject, Client, ABC):
         """
         if isinstance(amount, float):
             if amount <= 0:
-                raise ValueError(f"Withdraw amount: {amount}" /
-                                 " must be positive.")
+                raise ValueError(f"Withdraw amount: {amount}" 
+                                 + " must be positive.")
 
             if amount > self.__balance:
-                raise ValueError(f"Withdraw amount: {amount} must not exceed" /
-                                f" the account balance: {self.__balance}.")
+                raise ValueError(f"Withdraw amount: {amount} must not exceed"
+                                + f" the account balance: {self.__balance}.")
             self.update_balance(-amount)
         elif isinstance(amount, int):
             if amount <= 0:
-                raise ValueError(f"Withdraw amount: {amount}" \
-                                 f" must be positive.")
+                raise ValueError(f"Withdraw amount: {amount}" 
+                                 + " must be positive.")
 
             if amount > self.__balance:
-                raise ValueError(f"Withdraw amount: {amount} must not exceed" \
-                                f" the account balance: {self.__balance}.")
+                raise ValueError(f"Withdraw amount: {amount} must not exceed"
+                               + f" the account balance: {self.__balance}.")
             amount = float(amount)
             self.update_balance(-amount)
         else:

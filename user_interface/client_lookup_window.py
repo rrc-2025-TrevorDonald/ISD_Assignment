@@ -121,6 +121,7 @@ class ClientLookupWindow(LookupWindow):
         Returns:
             None
         """
+        column = 0
         selected_account_number = self.account_table.item(row, column).text()
 
         if selected_account_number == "":
@@ -153,8 +154,8 @@ class ClientLookupWindow(LookupWindow):
             None
         """
         for row in range(self.account_table.rowCount()):
-            if self.account_table.item(row, 0).text() == \
-                str(account.account_number):
+            if (self.account_table.item(row, 0).text() ==
+                str(account.account_number)):
                 this_account = self.account_table.item(row, 0).text()
                 self.__accounts[this_account] = account
                 update_data(account)
