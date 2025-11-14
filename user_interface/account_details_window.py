@@ -74,7 +74,6 @@ class AccountDetailsWindow(DetailsWindow):
         except Exception as e:
             QMessageBox.information(self, f"{transaction_type} Failed",
             f"{e}")
-            print(e)
             self.transaction_amount_edit.setText("")
             self.transaction_amount_edit.setFocus()
 

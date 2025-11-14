@@ -8,7 +8,7 @@ import sys
 # CODE CAN RUN FROM THIS DIRECTORY.
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import csv
-from datetime import datetime
+from datetime import date
 import logging
 from bank_account import *
 from client.client import Client
@@ -73,22 +73,26 @@ def load_data()->tuple[dict,dict]:
         reader = csv.DictReader(csvfile)
         for row in reader:
             try:
+                account_number = int(row["account_number"])
+                client_number = int(row["client_number"])
+                balance = float(row["balance"])
+                year, month, day = row["date_created"].strip().split("-")
+                date_created = date(int(year), int(month), int(day))
+
                 if row["account_type"] == "ChequingAccount":
-                    listed_account = ChequingAccount(
-                        int(row["account_number"]), int(row["client_number"]),
-                        float(row["balance"]), row["date_created"],
-                        float(row["overdraft_limit"]),
-                        float(row["overdraft_rate"]))
+                    overdraft_limit = float(row["overdraft_limit"])
+                    overdraft_rate = float(row["overdraft_rate"])
+                    listed_account = ChequingAccount(account_number,
+                        client_number, balance, date_created, overdraft_limit,  
+                        overdraft_rate)
                 elif row["account_type"] == "InvestmentAccount":
-                    listed_account = InvestmentAccount(
-                        int(row["account_number"]), int(row["client_number"]),
-                        float(row["balance"]), row["date_created"],
-                        float(row["management_fee"]))
+                    management_fee = float(row["management_fee"])
+                    listed_account = InvestmentAccount(account_number,
+                        client_number,balance, date_created, management_fee)
                 elif row["account_type"] == "SavingsAccount":
-                    listed_account = SavingsAccount(
-                        int(row["account_number"]), int(row["client_number"]),
-                        float(row["balance"]), row["date_created"],
-                        float(row["minimum_balance"]))
+                    minimum_balance = float(row["minimum_balance"])
+                    listed_account = SavingsAccount(account_number,
+                        client_number, balance, date_created, minimum_balance)
                 else:
                     raise ValueError("No a valid account type.")
 
