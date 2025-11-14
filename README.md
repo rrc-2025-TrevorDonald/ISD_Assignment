@@ -64,3 +64,15 @@ method contained within the BankAccount class it calls the notify method when sp
 making a fully automated notification system for alerts to an account. The criteria is set to call the
 notify method when a withdraw/deposit is more than $9999.99 and when an accounts balance falls below
 $50.00.
+
+Assignment 04: The Event-Driven Programming Paradigm
+
+The Event-Driven Programming Paradigm was achieve within this assignment by calling upon different
+method when a certain event is triggered. We triggered a multitude of different event using the
+PySide6 module, for the majority we triggered events when a button was pressed within the client
+lookup window or the account detail window for example the client lookup button to search for the
+accounts of the given client, or depositing/withdrawing from an account. We also used cell click
+events to bring up the account detail window when selecting a row of a given account. We also
+triggered the rows to reset whenever you edit the client text input to remove the account of the
+previous searched account. But finally we signalled from the account detail window back to the
+client lookup window to update the selected account with the changes made to the account.
