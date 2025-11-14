@@ -139,7 +139,7 @@ class ClientLookupWindow(LookupWindow):
             QMessageBox.information(self, "No Bank Account",
             "Bank Account selected does not exist.")
 
-    @Slot(BankAccount)
+    @Slot()
     def __update_data(self, account:BankAccount) -> None:
         """
         Description:
@@ -156,6 +156,7 @@ class ClientLookupWindow(LookupWindow):
         for row in range(self.account_table.rowCount()):
             if (self.account_table.item(row, 0).text() ==
                 str(account.account_number)):
-                this_account = self.account_table.item(row, 0).text()
-                self.__accounts[this_account] = account
+                updated_account = QTableWidgetItem(f"${account.balance:,.2f}")
+                self.account_table.setItem(row, 1, updated_account)
+                self.__accounts[account.account_number] = account
                 update_data(account)
