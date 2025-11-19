@@ -32,6 +32,8 @@ class ClientLookupWindow(LookupWindow):
         self.client_number_edit.textChanged.connect(self.__on_text_changed)
         self.account_table.cellClicked.connect(self.__on_select_account)
 
+        self.filter_button.clicked.connect(self.__on_filter_clicked)
+
     @Slot()
     def __on_lookup_client(self) -> None:
         """
@@ -160,3 +162,27 @@ class ClientLookupWindow(LookupWindow):
                 self.account_table.setItem(row, 1, updated_account)
                 self.__accounts[account.account_number] = account
                 update_data(account)
+
+    @Slot()
+    def __on_filter_clicked(self) -> None:
+        """
+        Description:
+        Returns:
+            None
+        """
+        displayed_accounts = []
+        filter_state = self.filter_button.text()
+        inputted_filter_text = self.filter_edit.text
+
+
+        if filter_state == "Apply Filter":
+            for row in self.account_table.rowCount():
+                if inputted_filter_text in row.items():
+                    displayed_accounts.append(self.account_table.item(row, 0))
+
+            for row in self.account_table.rowCount():
+                if row not in displayed_accounts:
+                    self.account_table.setRowHidden()
+
+        else:
+            __toggle_filter()
