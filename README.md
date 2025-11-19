@@ -76,3 +76,7 @@ events to bring up the account detail window when selecting a row of a given acc
 triggered the rows to reset whenever you edit the client text input to remove the account of the
 previous searched account. But finally we signalled from the account detail window back to the
 client lookup window to update the selected account with the changes made to the account.
+
+
+Assignment 05: Filtering, Autodoc, Installer
+
