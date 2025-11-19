@@ -73,6 +73,7 @@ class ClientLookupWindow(LookupWindow):
             self.client_info_label.setText(
                 f"Client Name: {chosen_client.first_name} "
                 + f"{chosen_client.last_name}")
+            self.__toggle_filter(False)
 
         for key in self.__accounts.items():
             if key[1].client_number == entered_client_number_int:
@@ -167,22 +168,76 @@ class ClientLookupWindow(LookupWindow):
     def __on_filter_clicked(self) -> None:
         """
         Description:
+            This method is responsible for checking the state of the
+            filter_button, if the state is Apply Filter it will take the
+            entered criteria of filter_edit and append all accounts
+            that are shown in the account_table that match the criteria
+            and append them to a list. It then compares that list and
+            hides all of the rows that contents do not match the created
+            list and tells the __toggle_filter method to change to the
+            "reset" option. If the state is not Apply Filter it tells
+            tells the __toggle_filter method reset the filter sections
+            to the default.
+
         Returns:
             None
         """
-        displayed_accounts = []
         filter_state = self.filter_button.text()
-        inputted_filter_text = self.filter_edit.text
-
 
         if filter_state == "Apply Filter":
-            for row in self.account_table.rowCount():
+            to_be_reset = True
+            displayed_accounts = []
+            inputted_filter_text = self.filter_edit.text()
+
+            for row in range(self.account_table.rowCount()):
                 if inputted_filter_text in row.items():
                     displayed_accounts.append(self.account_table.item(row, 0))
 
             for row in self.account_table.rowCount():
                 if row not in displayed_accounts:
-                    self.account_table.setRowHidden()
+                    self.account_table.setRowHidden(row, True)
 
         else:
-            __toggle_filter()
+            to_be_reset = False
+
+        self.__toggle_filter(to_be_reset)
+
+    def __toggle_filter(self, filter_on:bool) -> None:
+        """
+        Description:
+            The method that is responsible to handling the state of the
+            filter section, if you have entered a filter option and
+            clicked apply filter this method will change the display of
+            the filter section to disable the combo box and input and
+            replace the apply filter button with a reset button. Then if
+            you hit the reset button will reset the filter section back
+            to the "default" where you can filter.
+
+        Args:
+            filter_on (bool): A boolean that is used to determine if the
+            method resets the filter section to default or displays the
+            reset filter option.
+
+        Returns:
+            None
+        """
+        self.filter_button.setEnabled(True)
+        if filter_on:
+            self.filter_button.setText("Reset")
+            self.filter_combo_box.setDisabled()
+            self.filter_edit.setDisabled()
+            self.filter_label.setText("Data is Currently Filtered")
+
+        else:
+            self.filter_button.setText("Apply Filter")
+
+            self.filter_combo_box.setEnabled(True)
+            self.filter_combo_box.setCurrentIndex(0)
+
+            self.filter_edit.setEnabled(True)
+            self.filter_edit.setText("")
+
+            for row in range(self.account_table.rowCount()):
+                self.account_table.setRowHidden(row, False)
+
+            self.filter_label.setText("Data is Not Currently Filtered")
