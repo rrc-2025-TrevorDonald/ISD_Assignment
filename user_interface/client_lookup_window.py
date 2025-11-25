@@ -81,7 +81,7 @@ class ClientLookupWindow(LookupWindow):
                 self.account_table.insertRow(rows)
 
                 account_number = QTableWidgetItem(str(key[1].account_number))
-                balance = QTableWidgetItem(f"{key[1].balance:,.2f}")
+                balance = QTableWidgetItem(f"${key[1].balance:,.2f}")
                 date_created = QTableWidgetItem(str(key[1]._date_created))
                 account_type = QTableWidgetItem(str(key[1].__class__.__name__))
 
@@ -186,15 +186,24 @@ class ClientLookupWindow(LookupWindow):
 
         if filter_state == "Apply Filter":
             to_be_reset = True
-            displayed_accounts = []
-            inputted_filter_text = self.filter_edit.text()
+            displayed_accounts = {}
+            inputted_filter_text = self.filter_edit.text().lower()
+            inputted_filter_type = self.filter_combo_box.currentIndex()
 
             for row in range(self.account_table.rowCount()):
-                if inputted_filter_text in row.items():
-                    displayed_accounts.append(self.account_table.item(row, 0))
+                if inputted_filter_text in (self.account_table.item(row,
+                   inputted_filter_type).text().strip("$").replace(",", "")
+                   .lower()):
+                    taken_row = self.account_table.item(row, 0).text()
+                    displayed_accounts[taken_row] = self.__accounts[taken_row]
 
-            for row in self.account_table.rowCount():
-                if row not in displayed_accounts:
+            print(inputted_filter_text)
+            print(inputted_filter_type)
+            print(displayed_accounts)
+
+            for row in range(self.account_table.rowCount()):
+                if (self.account_table.item(row, 0).text()
+                    not in displayed_accounts):
                     self.account_table.setRowHidden(row, True)
 
         else:
@@ -224,8 +233,8 @@ class ClientLookupWindow(LookupWindow):
         self.filter_button.setEnabled(True)
         if filter_on:
             self.filter_button.setText("Reset")
-            self.filter_combo_box.setDisabled()
-            self.filter_edit.setDisabled()
+            self.filter_combo_box.setDisabled(True)
+            self.filter_edit.setDisabled(True)
             self.filter_label.setText("Data is Currently Filtered")
 
         else:
