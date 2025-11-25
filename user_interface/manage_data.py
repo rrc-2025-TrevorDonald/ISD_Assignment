@@ -49,8 +49,10 @@ accounts_csv_path = os.path.join(data_dir, 'accounts.csv')
 
 def load_data()->tuple[dict,dict]:
     """
-    Populates a client dictionary and an account dictionary with 
-    corresponding data from files within the data directory.
+    Description:
+        Populates a client dictionary and an account dictionary with 
+        corresponding data from files within the data directory.
+    
     Returns:
         tuple containing client dictionary and account dictionary.
     """
@@ -113,8 +115,10 @@ def load_data()->tuple[dict,dict]:
 
 def update_data(updated_account: BankAccount) -> None:
     """
-    A function to update the accounts.csv file with balance 
-    data provided in the BankAccount argument.
+    Description:
+        A function to update the accounts.csv file with balance 
+        data provided in the BankAccount argument.
+    
     Args:
         updated_account (BankAccount): A bank account containing an
         updated balance.
