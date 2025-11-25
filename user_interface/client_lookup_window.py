@@ -153,6 +153,11 @@ class ClientLookupWindow(LookupWindow):
             the csv file storing the new current balance of any account
             that will be changed.
 
+        Args:
+            account (BankAccount): The BankAccount received that is used
+            to update the current BankAccount with the new updated
+            information.
+
         Returns:
             None
         """

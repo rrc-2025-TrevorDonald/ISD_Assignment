@@ -16,6 +16,7 @@ class AccountDetailsWindow(DetailsWindow):
     def __init__(self, account:BankAccount) -> None:
         """
         Initializes a new instance of the ExtendedAccountDetails window.
+        
         Args:
             account: The bank account to be displayed.
         Returns:

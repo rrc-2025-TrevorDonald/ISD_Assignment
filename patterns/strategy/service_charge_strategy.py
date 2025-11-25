@@ -22,6 +22,10 @@ class ServiceChargeStrategy(ABC):
             Abstract method thats going to be implemented within the
             "Child/Sub" classes.
 
+        Args:
+            account (BankAccount): The BankAccount that the service
+            charges are calculated on and applied to.
+
         Returns:
             float(): Will be returned in Child/Sub classes.            
         """
